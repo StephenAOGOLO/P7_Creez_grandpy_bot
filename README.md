@@ -51,4 +51,6 @@
 ### Découpage du projet
 
 La réalisation du projet s'appuie sur une méthodologie agile.
-Sa réalisation est disponible sur : [Trello du Projet](https://trello.com/invite/b/rpLoSERM/1b9969b583e9da8879e4e900f5909e7d/p7creezgrandpybot) 
+Sa réalisation est disponible sur : [Trello du Projet](https://trello.com/invite/b/rpLoSERM/1b9969b583e9da8879e4e900f5909e7d/p7creezgrandpybot)
+
+ 
