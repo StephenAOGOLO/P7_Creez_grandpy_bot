@@ -48,9 +48,17 @@
     Elle est en forme de té, une branche débouche au 43 rue de Paradis,  
     la deuxième au 57 rue d'Hauteville et la troisième en impasse.  
     
-### Découpage du projet
+### Conception & Réalisation
 
-La réalisation du projet s'appuie sur une méthodologie agile.
-Sa réalisation est disponible sur : [Trello du Projet](https://trello.com/invite/b/rpLoSERM/1b9969b583e9da8879e4e900f5909e7d/p7creezgrandpybot)
+La réalisation du projet s'appuie sur une méthodologie agile.  
+Ses étapes sont disponibles sur : [Trello](https://trello.com/invite/b/rpLoSERM/1b9969b583e9da8879e4e900f5909e7d/p7creezgrandpybot)  
+
+Les informations principales du projet ainsi que  
+les composants de la solution sont disponibles sur : [GitHub](https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot)  
+
+### Installation et Hébergement
+#### Installation manuelle  
+#### Installation automatique  
+#### Hébergement  
 
  
