@@ -1,0 +1,20 @@
+body
+{
+    background-color: purple;
+}
+.GPB
+{
+    color: white
+}
+.response
+{
+    background-color: rgb(238, 130, 238);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content : space-around;
+	align-items: center;
+	border: 2px solid #444;
+	height: 200px;
+	border: 5px solid #444;
+}

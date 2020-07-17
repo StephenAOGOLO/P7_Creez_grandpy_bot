@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>GrandPyBot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css')}}">
 </head>
 <body>
-    <h1>
-        Bonjour !!!! Que puis-je faire pour vous ?
-    </h1>
+    <fieldset>
+        <legend class="GPB">GrandPyBot</legend>
+        <h1>
+            Bonjour !!!!
+        </h1>
+        <p>
+            <label class="your_text" for="recherche">Que puis-je faire pour vous ?</label><br />
+            <input type="search" id ="recherche"/>
+            <input type="submit" />
+        </p>
+        <div class="response">
+
+        </div>
+    </fieldset>
 
 </body>
 </html>

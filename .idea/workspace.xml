@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b4b3baf8-d95d-4feb-98e2-266ca00bb026" name="Default Changelist" comment="8th (4th try) - on branch master&#10;- Flask installation (minimum server is on)">
-      <change afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.idea/P7_Creez_grandpy_bot.iml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.gitignore" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="b4b3baf8-d95d-4feb-98e2-266ca00bb026" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,13 +13,14 @@
         <option value="HTML File" />
         <option value="BATCH File" />
         <option value="Python Script" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot" value="1.0_dev" />
+        <entry key="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot" />
@@ -44,11 +37,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="add_unversioned_files" value="true" />
+    <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/P7_Creez_grandpy_bot" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\07_Creez_grandpy_bot\GrandPyBot\static\css" />
       <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\07_Creez_grandpy_bot\GrandPyBot" />
       <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\07_Creez_grandpy_bot\GrandPyBot\views" />
       <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\07_Creez_grandpy_bot" />
@@ -195,7 +190,42 @@
       <option name="project" value="LOCAL" />
       <updated>1594997003988</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="8th (5th try after clone) - on branch master&#10;- Flask installation (minimum server is on)">
+      <created>1594998313859</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1594998313859</updated>
+    </task>
+    <task id="LOCAL-00012" summary="8th (6th try after clone) - on branch master&#10;- Flask installation (minimum server is on)">
+      <created>1594998790459</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1594998790459</updated>
+    </task>
+    <task id="LOCAL-00013" summary="8th (7th try after clone) - on branch 1.0_dev&#10;- Flask installation (minimum server is on)">
+      <created>1594999617852</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1594999617852</updated>
+    </task>
+    <task id="LOCAL-00014" summary="9th - on branch 1.0_dev&#10;- SQLALCHEMY (minimum ORM is on)">
+      <created>1595021580704</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1595021580704</updated>
+    </task>
+    <task id="LOCAL-00015" summary="9th - on branch 1.0_dev&#10;- SQLALCHEMY (minimum ORM is on)">
+      <created>1595023287714</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1595023287714</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -209,26 +239,40 @@
     <MESSAGE value="8th (2nd try) - on branch master&#10;- Flask installation (minimum server is on)" />
     <MESSAGE value="8th (3rd try) - on branch master&#10;- Flask installation (minimum server is on)" />
     <MESSAGE value="8th (4th try) - on branch master&#10;- Flask installation (minimum server is on)" />
-    <option name="LAST_COMMIT_MESSAGE" value="8th (4th try) - on branch master&#10;- Flask installation (minimum server is on)" />
+    <MESSAGE value="8th (5th try after clone) - on branch master&#10;- Flask installation (minimum server is on)" />
+    <MESSAGE value="8th (6th try after clone) - on branch master&#10;- Flask installation (minimum server is on)" />
+    <MESSAGE value="8th (7th try after clone) - on branch 1.0_dev&#10;- Flask installation (minimum server is on)" />
+    <MESSAGE value="9th - on branch 1.0_dev&#10;- SQLALCHEMY (minimum ORM is on)" />
+    <option name="LAST_COMMIT_MESSAGE" value="9th - on branch 1.0_dev&#10;- SQLALCHEMY (minimum ORM is on)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2472" y="178" key="#Notifications" timestamp="1594997243339">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2472" y="178" key="#Notifications/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594997243339" />
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594995720721">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595003440509">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594995720721" />
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595003440509" />
+    <state x="960" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595020948502">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="3120" y="323" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595003400391" />
+    <state x="960" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1595020948502" />
+    <state x="410" y="100" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1595020312330">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="410" y="100" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1595020312330" />
     <state x="2560" y="257" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1594723063833">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2560" y="257" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594723063833" />
-    <state x="2534" y="115" key="CommitChangelistDialog2" timestamp="1594998313444">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="491" y="0" key="CommitChangelistDialog2" timestamp="1595023287197">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="491" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1594645160516" />
-    <state x="2534" y="115" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594998313444" />
+    <state x="2534" y="115" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594999617365" />
+    <state x="491" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1595023287197" />
     <state x="2610" y="443" key="DBNavigator.CreateRenameSessionDialog" timestamp="1594725818743">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -249,22 +293,26 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2725" y="414" key="Github.ShareDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594637125211" />
-    <state width="1899" height="276" key="GridCell.Tab.0.bottom" timestamp="1594996352815">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="745" height="276" key="GridCell.Tab.0.bottom" timestamp="1595022832657">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1899" height="276" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594996352815" />
-    <state width="1899" height="276" key="GridCell.Tab.0.center" timestamp="1594996352814">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="938" height="276" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595005518036" />
+    <state width="745" height="276" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595022832657" />
+    <state width="745" height="276" key="GridCell.Tab.0.center" timestamp="1595022832657">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1899" height="276" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594996352814" />
-    <state width="1899" height="276" key="GridCell.Tab.0.left" timestamp="1594996352814">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="938" height="276" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595005518036" />
+    <state width="745" height="276" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595022832657" />
+    <state width="745" height="276" key="GridCell.Tab.0.left" timestamp="1595022832657">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1899" height="276" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594996352814" />
-    <state width="1899" height="276" key="GridCell.Tab.0.right" timestamp="1594996352814">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="938" height="276" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595005518036" />
+    <state width="745" height="276" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595022832657" />
+    <state width="745" height="276" key="GridCell.Tab.0.right" timestamp="1595022832657">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1899" height="276" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594996352814" />
+    <state width="938" height="276" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595005518036" />
+    <state width="745" height="276" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595022832657" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1594918402070">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -281,20 +329,23 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594918402070" />
-    <state x="2381" y="162" key="SettingsEditor" timestamp="1594918069516">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="-82" y="58" key="SettingsEditor" timestamp="1595022828129">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="2381" y="162" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594918069516" />
-    <state x="2472" y="254" key="Vcs.Push.Dialog.v2" timestamp="1594998318718">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="2381" y="162" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595002711976" />
+    <state x="-82" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1595022828129" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1595023289642">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1594645162611" />
-    <state x="2472" y="254" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594998318718" />
-    <state x="2501" y="300" key="com.intellij.ide.util.TipDialog" timestamp="1594996485028">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="2472" y="254" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1595000036394" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1595023289642" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1595022851588">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1594720855591" />
-    <state x="2501" y="300" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594996485028" />
+    <state x="2501" y="300" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594999380643" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1595022851588" />
     <state x="2689" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594997858990">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -303,5 +354,9 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2555" y="311" key="git4idea.merge.GitPullDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594997290703" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594999411431">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594999411416" />
   </component>
 </project>

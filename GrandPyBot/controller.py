@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
+from GrandPyBot.simulation.mocks import Sentence
 
 controller = Flask(__name__)
 controller.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database/p7.db"
