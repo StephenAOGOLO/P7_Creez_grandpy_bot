@@ -1,0 +1,2 @@
+flask run
+start http://127.0.0.1:1000
