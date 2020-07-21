@@ -6,6 +6,10 @@ body
 {
     color: white
 }
+#research
+{
+    width: 800px
+}
 .response
 {
     background-color: rgb(238, 130, 238);

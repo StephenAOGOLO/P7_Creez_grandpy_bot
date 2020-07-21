@@ -1,13 +1,22 @@
 # Created by .ignore support plugin (hsz.mobi)
-/cours
-/00_auto_install.zip
+/.pytest_cache
 /00_auto_install
 /backup
+/cours
 /Include
 /Lib
 /Scripts
-/tcl
 /SQLITE
+/tcl
+/tests
+/00_auto_install.zip
+
+
+
+
+
+
+
 
 
 
