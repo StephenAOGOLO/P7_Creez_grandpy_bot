@@ -10,7 +10,7 @@ body
 {
     width: 800px
 }
-.response
+#response
 {
     background-color: rgb(238, 130, 238);
 	display: flex;

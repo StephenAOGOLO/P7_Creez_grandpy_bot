@@ -1,21 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GrandPyBot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css')}}">
+</head>
 <body>
-        <fieldset>
+    <fieldset>
         <legend class="GPB">GrandPyBot - by Stephen A.OGOLO</legend>
         <form id="form-area">
             <h1>
-                {{ mot }}
+                Bonjour !!!!
             </h1>
             <p>
                 <label class="your_text" for="recherche">Que puis-je faire pour vous ?</label><br />
                 <input type="text" id ="research" name="research"/>
                 <input type="submit" />
             </p>
-                <script type="text/javascript" src="{{ url_for('static', filename='js/treatment.js') }}"></script>
-            <script type="text/javascript" src="{{ url_for('static', filename='js/mediawiki.js') }}"></script>
-            <div id="response">
-                {{ response }}
+            <div class="response">
+
             </div>
         </form>
+        <script>
+            let form = document.querySelector("#form-area")
+        </script>
+    </fieldset>
 
-        </fieldset>
 </body>
+</html>
