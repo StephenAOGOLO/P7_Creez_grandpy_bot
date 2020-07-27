@@ -99,6 +99,11 @@ def get_article_wiki_by_pageid(page_id):
     return data["query"]["pages"][page_id]["extract"]
 
 
+def modelling_text(text):
+    pass
+
+
+
 if __name__ == "__main__":
     info = get_info_from_title("PARIS")
     page_id = get_page_id_from_data(info)
