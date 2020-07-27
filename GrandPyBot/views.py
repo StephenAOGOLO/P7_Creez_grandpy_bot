@@ -8,22 +8,22 @@ lg.basicConfig(level=lg.INFO)
 @app.route('/')
 @app.route('/home')
 def home():
-    mot = "bonjour"
+    salutation = "bonjour"
     response = "Je vais vous répondre ..."
-    return render_template("/interface/page.html", mot=mot, response=response)
+    return render_template("/interface/page.html", mot=salutation, response=response)
 
 
 @app.route('/catcher', methods=["POST"])
 def catcher():
 
-    form_content = request.form["research"]
-    lg.info("Before treatment>>>> : "+form_content)
-    response = transform_to_upper(form_content)
-    response = text_replace(response, "+")
-    response = text_result(response)
-    lg.info("after treatment>>>> : " + str(response))
-    response = data_from_wiki(response)
-    lg.info("after wiki treatment>>>> : " + str(response))
+    user_entry = request.form["research"]
+    lg.info("\nUser Entry >>>> : "+user_entry)
+    user_entry = text_replace(user_entry, "+")
+    lg.info("Media wiki API resqusting...")
+    response = get_info_from_title(user_entry)
+    response = get_page_id_from_data(response)
+    response = get_article_wiki_by_pageid(response)
+    lg.info("Media wiki Response >>>> : " + str(response))
     response = str(response)
     print("type response: {}\n".format(type(response)))
     return jsonify(response)
