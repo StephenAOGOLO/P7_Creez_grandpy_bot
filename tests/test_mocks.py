@@ -53,7 +53,16 @@ def test_d01_get_article_wiki_by_pageid(monkeypatch):
     assert result == str
 
 
-def test_e01_modelling_text(monkeypatch):
-    def mock_modelling_text(__str__):
-        pass
-    pass
+#def test_e01_modelling_text(monkeypatch):
+#    def mock_modelling_text(__str__):
+#        pass
+#    pass
+
+
+def test_f01_is_country_known(monkeypatch):
+    def mock_is_country_known(__str__):
+        return {bool, str}
+    monkeypatch.setattr('GrandPyBot.utils.is_country_known', mock_is_country_known)
+    result = utils.is_country_known("Espagne")
+    assert result == {bool, str}
+

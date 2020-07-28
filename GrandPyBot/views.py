@@ -18,9 +18,10 @@ def catcher():
 
     user_entry = request.form["research"]
     lg.info("\nUser Entry >>>> : "+user_entry)
-    user_entry = text_replace(user_entry, "+")
+    #user_entry = text_replace(user_entry, "+")
     lg.info("Media wiki API resqusting...")
-    response = get_info_from_title(user_entry)
+    user_entry = is_country_known(user_entry)
+    response = get_info_from_title(user_entry["country"])
     response = get_page_id_from_data(response)
     response = get_article_wiki_by_pageid(response)
     lg.info("Media wiki Response >>>> : " + str(response))
