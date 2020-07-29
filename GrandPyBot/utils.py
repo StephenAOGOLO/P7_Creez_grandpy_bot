@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
 import requests as rqsts
+import json
+import time
 import logging as lg
 lg.basicConfig(level=lg.INFO)
 
@@ -128,16 +131,193 @@ def is_country_known(text):
     print("dict_response : {}\n".format(dict_response))
     return dict_response
 
+def is_word_in(first_list, second_list, delete=True):
+    found = ""
+    presence = 0
+    status_presence = False
+    raw_text = " ".join(first_list)
+    for i1, e1 in enumerate(first_list):
+        for i2, e2 in enumerate(second_list):
+            e2 = e2.replace("\n", "")
+            if e1.lower() == e2.lower():
+                found += e1+" "
+                presence += 1
+    if delete:
+        bad_words = found.split()
+        for words in bad_words:
+            first_list.remove(words)
+            #first_list.remove(e1)
+
+    if presence > 0:
+        status_presence = True
+    treated_text = " ".join(first_list)
+    dic_result = {"text_before": raw_text,
+                  "text_after": treated_text,
+                  "bad_words_presence": status_presence,
+                  "bad_words": bad_words}
+    lg.info("_| Rapport de traitement de saisie |_ \n{}".format(dic_result.items()))
+    return dic_result
 
 
+def cleanup_text(text):
+    hashed_text = hash_text(text)
+    #stop_words = stop_words_with(".\\static\\txt\\test.txt")
+    stop_words = stop_words_with(".\\GrandPyBot\\static\\txt\\test.txt")
+    treatment_report = is_word_in(hashed_text, stop_words)
+    cleaned_word = treatment_report["text_after"]
+    return cleaned_word
 
+
+def hash_text(text):
+    return str(text).split()
+
+
+def open_json_file(json_file):
+    """'open_json_file' method read a given json file.
+    It returns the content file into a dict."""
+    with open(json_file, encoding="utf-8") as file:
+        data = json.load(file)
+    return data
+
+def create_file(path_fichier="./",name_fichier="fichier_genere_par_python" ,extension="txt", contenu = "vide"):
+
+    now = time.localtime()
+    when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
+    creation_time = "_"+when_happens
+    print("=" * 150)
+    new_file = open(path_fichier+"//"+name_fichier+creation_time+"."+extension, "wt")
+    for ligne in contenu:
+        new_file.write(ligne)
+    new_file.close
+    print("le fichier '{}.{}' est prêt".format(name_fichier,extension))
+
+
+def open_file(path_fichier):
+    """ Fonction d'ouverture d'un fichier
+                        et
+        sauvegrade du contenu en mémoire
+
+    :param path_fichier:
+    :return liste_fichier: """
+
+    with open(path_fichier,"rt") as fichier:
+        liste_fichier = fichier.readlines()
+    lg.debug("=" * 150)
+    lg.debug("\nVoici le contenu du fichier : {}\n".format(path_fichier))
+    for indice, ligne in enumerate(liste_fichier):
+        lg.debug("ligne {} : {}".format(indice, ligne))
+    lg.debug("=" * 150)
+    lg.debug("\nFin de fichier\n")
+    lg.debug("=" * 150)
+    return liste_fichier
+
+def stop_words_with(file=".\\GrandPyBot\\static\\txt\\all_stop_words.txt"):
+    stop_words = open_file(file)
+    return stop_words
+
+
+def entry_treatment(text):
+    lg.info("\nUser Entry >>>> : " + text)
+    lg.info("Media wiki API resqusting...")
+    text = cleanup_text(text)
+    #text = is_country_known(text)
+    #text = text["country"]
+    text = get_info_from_title(text)
+    text = get_page_id_from_data(text)
+    text = get_article_wiki_by_pageid(text)
+    lg.info("Media wiki Response >>>> : " + str(text))
+    text = str(text)
+    print("type response: {}\n".format(type(text)))
+    return text
 
 if __name__ == "__main__":
+    #pass
     #info = get_info_from_title("PARIS")
     #page_id = get_page_id_from_data(info)
     #article = get_article_wiki_by_pageid(page_id)
     #print(article)
-    print("\nfirst try")
-    is_country_known("paris chine allemagne")
-    print("\nsecond try")
-    is_country_known("allemagne ngiporengi opjegiezn ieoizgn")
+
+    #print("\nfirst try")
+    #is_country_known("paris chine allemagne")
+    #print("\nsecond try")
+    #is_country_known("allemagne ngiporengi opjegiezn ieoizgn")
+
+    #text = entry_treatment("brésil")
+    #print(text)
+
+    all_words = open_file(".\\static\\txt\\all_stop_words.txt")
+    print(type(all_words))
+
+    dict_all_words = {}
+    liste_1 = []
+    liste_2 = []
+    liste_3 = []
+    liste_4 = []
+    liste_5 = []
+    liste_6 = []
+    liste_7 = []
+    liste_8 = []
+    liste_9 = []
+    liste_10 = []
+    liste_x = []
+    for word in all_words:
+        word = word.replace("\n", "")
+        index = 1
+        if len(word) == index:
+            liste_1.append(word)
+            dict_all_words[str(index)] = liste_1
+            #break
+        index += 1
+        if len(word) == index:
+            liste_2.append(word)
+            dict_all_words[str(index)] = liste_2
+            #break
+        index += 1
+        if len(word) == index:
+            liste_3.append(word)
+            dict_all_words[str(index)] = liste_3
+            #break
+        index += 1
+        if len(word) == index:
+            liste_4.append(word)
+            dict_all_words[str(index)] = liste_4
+            #break
+        index += 1
+        if len(word) == index:
+            liste_5.append(word)
+            dict_all_words[str(index)] = liste_5
+            #break
+        index += 1
+        if len(word) == index:
+            liste_6.append(word)
+            dict_all_words[str(index)] = liste_6
+            #break
+        index += 1
+        if len(word) == index:
+            liste_7.append(word)
+            dict_all_words[str(index)] = liste_7
+            #break
+        index += 1
+        if len(word) == index:
+            liste_8.append(word)
+            dict_all_words[str(index)] = liste_8
+            #break
+        index += 1
+        if len(word) == index:
+            liste_9.append(word)
+            dict_all_words[str(index)] = liste_9
+            #break
+        index += 1
+        if len(word) == index:
+            liste_10.append(word)
+            dict_all_words[str(index)] = liste_10
+            #break
+        index += 1
+        if len(word) > index:
+            liste_x.append(word)
+            dict_all_words["over_ten"] = liste_x
+            #break
+    print("fin")
+
+
+
