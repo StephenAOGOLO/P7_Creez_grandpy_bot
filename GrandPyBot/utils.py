@@ -204,8 +204,8 @@ def is_word_in(first_list, second_list, delete=True):
 
 def cleanup_text(text):
     hashed_text = hash_text(text)
-    stop_words = stop_words_with_json()
-    #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
+    #stop_words = stop_words_with_json()
+    stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
     treatment_report = is_word_bad(hashed_text, stop_words)
     cleaned_word = treatment_report["text_after"]
     return cleaned_word
@@ -299,8 +299,8 @@ if __name__ == "__main__":
     #print("\nsecond try")
     #is_country_known("allemagne ngiporengi opjegiezn ieoizgn")
 
-    text = entry_treatment("         ")
-    print(text)
+    #text = entry_treatment("         ")
+    #print(text)
 
     #dico = open_json_file(".\\static\\json\\bad_words.json")
     #print("ok")
@@ -308,6 +308,15 @@ if __name__ == "__main__":
     #print(dico[str(value)])
     ##for k, v in dico.items():
     ##    print("{} ---> {}".format(k,v))
+
+    #result = get_info_from_title("brésil")
+
+    liste_1 = ["a", "b", "c", "d"]
+    liste_2 = {"1": ["a", "b", "d"]}
+    result = is_word_bad(liste_1, liste_2)
+    for k, v in result.items():
+        print(k, v)
+
 
 
 
