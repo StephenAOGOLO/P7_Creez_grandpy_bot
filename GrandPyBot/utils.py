@@ -4,6 +4,14 @@ import json
 import logging as lg
 lg.basicConfig(level=lg.INFO)
 
+def get_coordinates_from_title(title):
+    wikiUrl = "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&&format=json&titles="
+    url = wikiUrl+title
+    all_data = rqsts.get(url)
+    all_data = all_data.json()
+    all_data = all_data["query"]["coordinates"]["0"]
+    return all_data
+
 
 def get_info_from_title(title):
     wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch='
