@@ -131,6 +131,49 @@ def is_country_known(text):
     print("dict_response : {}\n".format(dict_response))
     return dict_response
 
+
+def is_word_bad(first_list, second_list, delete=True):
+    found = ""
+    presence = 0
+    status_presence = False
+    raw_text = " ".join(first_list)
+    for i1, e1 in enumerate(first_list):
+        length_to_check = len(e1)
+        #second_list = second_list[str(length_to_check)]
+        for i2, e2 in enumerate(second_list[str(length_to_check)]):
+            e2 = e2.replace("\n", "")
+            if e1.lower() == e2.lower():
+                found += e1+" "
+                presence += 1
+    try:
+        if delete:
+            bad_words = found.split()
+            count = {}.fromkeys(set(bad_words), 0)
+            for w in bad_words:
+                count[w] += 1
+            for k, v in count.items():
+                if v > 1:
+                    for i in range(v-1):
+                        bad_words.remove(k)
+            for words in bad_words:
+                occurences = first_list.count(words)
+                for i in range(occurences):
+                    first_list.remove(words)
+                    #first_list.remove(e1)
+    except Exception as e:
+        lg.warning("erreur sur fonction 'is_bad_word()'\n>>{}".format(e))
+
+    if presence > 0:
+        status_presence = True
+    treated_text = " ".join(first_list)
+    dic_result = {"text_before": raw_text,
+                  "text_after": treated_text,
+                  "bad_words_presence": status_presence,
+                  "bad_words": bad_words}
+    lg.info("_| Rapport de traitement de saisie |_ \n{}".format(dic_result.items()))
+    return dic_result
+
+
 def is_word_in(first_list, second_list, delete=True):
     found = ""
     presence = 0
@@ -161,9 +204,9 @@ def is_word_in(first_list, second_list, delete=True):
 
 def cleanup_text(text):
     hashed_text = hash_text(text)
-    #stop_words = stop_words_with(".\\static\\txt\\test.txt")
-    stop_words = stop_words_with(".\\GrandPyBot\\static\\txt\\test.txt")
-    treatment_report = is_word_in(hashed_text, stop_words)
+    stop_words = stop_words_with_json()
+    #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
+    treatment_report = is_word_bad(hashed_text, stop_words)
     cleaned_word = treatment_report["text_after"]
     return cleaned_word
 
@@ -211,15 +254,29 @@ def open_file(path_fichier):
     lg.debug("=" * 150)
     return liste_fichier
 
-def stop_words_with(file=".\\GrandPyBot\\static\\txt\\all_stop_words.txt"):
+def stop_words_with_txt(file=".\\GrandPyBot\\static\\txt\\all_stop_words.txt"):
     stop_words = open_file(file)
     return stop_words
 
+def stop_words_with_json(file=".\\GrandPyBot\\\\static\\json\\bad_words.json"):
+    stop_words = open_json_file(file)
+    return stop_words
+
+def is_entry_empty(text):
+    status = False
+    text = text.strip()
+    if text == "":
+        status = True
+        text = "Pouvez-vous reformuler votre question ?"
+    report = {"status": status, "text": text}
+    return report
 
 def entry_treatment(text):
     lg.info("\nUser Entry >>>> : " + text)
     lg.info("Media wiki API resqusting...")
     text = cleanup_text(text)
+    if is_entry_empty(text)["status"]:
+        return is_entry_empty(text)["text"]
     #text = is_country_known(text)
     #text = text["country"]
     text = get_info_from_title(text)
@@ -242,82 +299,17 @@ if __name__ == "__main__":
     #print("\nsecond try")
     #is_country_known("allemagne ngiporengi opjegiezn ieoizgn")
 
-    #text = entry_treatment("brésil")
-    #print(text)
+    text = entry_treatment("         ")
+    print(text)
 
-    all_words = open_file(".\\static\\txt\\all_stop_words.txt")
-    print(type(all_words))
+    #dico = open_json_file(".\\static\\json\\bad_words.json")
+    #print("ok")
+    #value = 2
+    #print(dico[str(value)])
+    ##for k, v in dico.items():
+    ##    print("{} ---> {}".format(k,v))
 
-    dict_all_words = {}
-    liste_1 = []
-    liste_2 = []
-    liste_3 = []
-    liste_4 = []
-    liste_5 = []
-    liste_6 = []
-    liste_7 = []
-    liste_8 = []
-    liste_9 = []
-    liste_10 = []
-    liste_x = []
-    for word in all_words:
-        word = word.replace("\n", "")
-        index = 1
-        if len(word) == index:
-            liste_1.append(word)
-            dict_all_words[str(index)] = liste_1
-            #break
-        index += 1
-        if len(word) == index:
-            liste_2.append(word)
-            dict_all_words[str(index)] = liste_2
-            #break
-        index += 1
-        if len(word) == index:
-            liste_3.append(word)
-            dict_all_words[str(index)] = liste_3
-            #break
-        index += 1
-        if len(word) == index:
-            liste_4.append(word)
-            dict_all_words[str(index)] = liste_4
-            #break
-        index += 1
-        if len(word) == index:
-            liste_5.append(word)
-            dict_all_words[str(index)] = liste_5
-            #break
-        index += 1
-        if len(word) == index:
-            liste_6.append(word)
-            dict_all_words[str(index)] = liste_6
-            #break
-        index += 1
-        if len(word) == index:
-            liste_7.append(word)
-            dict_all_words[str(index)] = liste_7
-            #break
-        index += 1
-        if len(word) == index:
-            liste_8.append(word)
-            dict_all_words[str(index)] = liste_8
-            #break
-        index += 1
-        if len(word) == index:
-            liste_9.append(word)
-            dict_all_words[str(index)] = liste_9
-            #break
-        index += 1
-        if len(word) == index:
-            liste_10.append(word)
-            dict_all_words[str(index)] = liste_10
-            #break
-        index += 1
-        if len(word) > index:
-            liste_x.append(word)
-            dict_all_words["over_ten"] = liste_x
-            #break
-    print("fin")
+
 
 
 

@@ -17,6 +17,8 @@ def home():
 def catcher():
 
     user_entry = request.form["research"]
+    if is_entry_empty(user_entry)["status"]:
+        return jsonify(is_entry_empty(user_entry)["text"])
     response = entry_treatment(user_entry)
     #lg.info("\nUser Entry >>>> : "+user_entry)
     ##user_entry = text_replace(user_entry, "+")
