@@ -16,8 +16,31 @@
             <div id="response">
                 {{ response }}
             </div>
-
         </form>
-
         </fieldset>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo5fjwftbiDE2hvr8TY8jzUHJdSqA2Tu0&callback=initMap" type="text/javascript"></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='js/gmap.js') }}"></script>-->
+        <script>
+                "use strict";
+                let map;
+                function initMap()
+                {
+                    map = new google.maps.Map(document.getElementById("gmap"),
+                    {
+
+                        center: { lat: {{ place['lat'] }} , lng: {{ place['lng'] }} },
+                        zoom: 9
+                    });
+                    marker = new google.maps.Marker(
+                    {
+                        position: { lat: {{ place['lat'] }} , lng: {{ place['lng'] }} },
+                        map: map
+                    })
+                }
+        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/gmap2.js') }}"></script>
+        <div id="gmap">
+        </div>
+        <div id="divplace">
+        </div>
 </body>

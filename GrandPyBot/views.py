@@ -10,12 +10,12 @@ lg.basicConfig(level=lg.INFO)
 def home():
     salutation = "bonjour"
     response = "Je vais vous répondre ..."
-    return render_template("/interface/page.html", mot=salutation, response=response)
+    place = {"lat": 16.25, "lng": -61.58333333, "search": False}
+    return render_template("/interface/page.html", mot=salutation, response=response, place=place)
 
 
 @app.route('/catcher', methods=["POST"])
 def catcher():
-
     user_entry = request.form["research"]
     if is_entry_empty(user_entry)["status"]:
         return jsonify(is_entry_empty(user_entry)["text"])
