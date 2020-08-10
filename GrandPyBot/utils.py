@@ -6,13 +6,56 @@ import logging as lg
 lg.basicConfig(level=lg.INFO)
 
 
-def get_coordinates_from_title(title):
+def get_coordinates(wiki_data, wiki_page_id, entry):
+    status = False
+    api = ""
+    api_data = ""
+    data_wiki = get_coordinates_from_wiki(wiki_data)
+    data_osm = get_coordinates_from_osm(entry)
+    if check_coordinates(data_wiki[str(wiki_page_id)]):
+        api = "wiki"
+        status = True
+        api_data = data_wiki
+    elif check_coordinates(data_osm):
+        api = "osm"
+        status = True
+        api_data = data_osm
+    report = {"status": status, "api": api, "data": api_data}
+    return report
+
+
+def check_coordinates(data):
+    status = False
+    if "coordinates" in data.keys():
+        status = True
+    return status
+
+
+def get_coordinates_from_wiki(title):
     wikiUrl = "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&&format=json&titles="
     url = wikiUrl+title
-    all_data = rqsts.get(url)
-    all_data = all_data.json()
-    all_data = all_data["query"]["pages"]
+    data = rqsts.get(url)
+    data = data.json()
+    all_data = data["query"]["pages"]
+    #all_data["coordinates"] = data[]
     return all_data
+
+
+def get_coordinates_from_osm(title):
+    osm_url = "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2&q="
+    url = osm_url + title
+    data = rqsts.get(url)
+    data = data.json()
+    data = data[0]
+    all_data = {
+        "all": data,
+        "coordinates": data["geojson"],
+        "lat": float(data["lat"]),
+        "lon": float(data["lon"])}
+    return all_data
+
+
+
 
 
 def get_info_from_title(title):
@@ -176,6 +219,10 @@ def stop_words_with_json(file=".\\GrandPyBot\\static\\json\\bad_words.json"):
     return stop_words
 
 
+def regulate_zoom(location):
+    pass
+
+
 def is_entry_empty(text):
     status = False
     text = text.strip()
@@ -200,11 +247,18 @@ def entry_treatment(text):
     lg.debug("type response: {}\n".format(type(output["article"])))
     info = output["info"]
     page_id = output["page_id"]
-    data = get_coordinates_from_title(info[0]["title"])
+    wiki_data = info[0]["title"]
+    # data = get_coordinates_from_wiki(info[0]["title"])
+    result = get_coordinates(wiki_data, page_id, text)
+    data = result["data"]
     location = {}
-    location["lng"] = data[str(page_id)]["coordinates"][0]["lon"]
-    location["lat"] = data[str(page_id)]["coordinates"][0]["lat"]
-    location["zoom"] = 10
+    if result["api"] == "wiki":
+        location["lng"] = data[str(page_id)]["coordinates"][0]["lon"]
+        location["lat"] = data[str(page_id)]["coordinates"][0]["lat"]
+    elif result["api"] == "osm":
+        location["lng"] = data["lon"]
+        location["lat"] = data["lat"]
+    location["zoom"] = 4
     location["search"] = True
     output["place"] = location
     lg.info("\nOUTPUT:\n{}\n".format(output))
@@ -213,11 +267,21 @@ def entry_treatment(text):
 
 if __name__ == "__main__":
     #pass
-    entry_treatment("ou se trouve openclassrooms")
+    #entry_treatment("ou se trouve openclassrooms")
+    entry_treatment("bonjour ou se trouve montmartre")
+    #data = coordinates_from_openstreetmap("openclassrooms")
+    #for k, v in data.items():
+    ##for i, e in enumerate(data):
+    #    print("{} --- {}\n".format(k, v))
+    #print(data["lat"]+"\n"+data["lon"]+"\n")
+    #result = get_coordinates("paris")
+    #print(result)
+    print("fin")
 
-
-
-
-
-
-
+    #data = {"place_id":71039865,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright","osm_type":"node","osm_id":6242758322,"boundingbox":["48.8747286","48.8748286","2.3504385","2.3505385"],"lat":"48.8747786","lon":"2.3504885","display_name":"OpenClassRooms, 7, Cité Paradis, Quartier de la Porte-Saint-Denis, Paris, Île-de-France, France métropolitaine, 75010, France","place_rank":30,"category":"office","type":"company","importance":0.101,"geojson":{"type":"Point","coordinates":[2.3504885,48.8747786]}}
+    #liste = data.keys()
+    #if "coordinates" in data.keys():
+    #    print("ok")
+    #else:
+    #    print("ko")
+    #print("fin")
