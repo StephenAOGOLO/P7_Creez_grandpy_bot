@@ -8,8 +8,10 @@
 /Scripts
 /SQLITE
 /tcl
+*.idea
 /00_auto_install.zip
-/tests
+/GrandPyBot/config.py
+
 
 
 

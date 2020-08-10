@@ -4,11 +4,11 @@ body
 }
 .GPB
 {
-    color: white
+    color: white;
 }
 #research
 {
-    width: 800px
+    width: 800px;
 }
 #response
 {
@@ -22,30 +22,18 @@ body
 	height: 200px;
 	border: 5px solid #444;
 }
-#gmap
-{
-    height: 45%;
-    width: 100%;
-    align-items: center;
-}
 html, body
 {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
-#divplace
+#place
 {
-	height: 45%;
-    width: 100%;
-    align-items: center;
-
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content : space-around;
-	border: 2px solid #444;
-	border: 5px solid #444;
-	background-color: brown;
+	height: 100%;
 }
+#test
+{
+    background-color: red;
+}
+

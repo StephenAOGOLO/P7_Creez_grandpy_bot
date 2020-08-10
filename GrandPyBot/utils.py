@@ -203,6 +203,7 @@ def entry_treatment(text):
     location = {}
     location["lng"] = data[str(page_id)]["coordinates"][0]["lon"]
     location["lat"] = data[str(page_id)]["coordinates"][0]["lat"]
+    location["zoom"] = 10
     location["search"] = True
     output["place"] = location
     lg.info("\nOUTPUT:\n{}\n".format(output))

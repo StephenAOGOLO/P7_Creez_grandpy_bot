@@ -5,6 +5,7 @@ import logging as lg
 lg.basicConfig(level=lg.INFO)
 
 
+@app.route('/index')
 @app.route('/')
 @app.route('/home')
 def home():
