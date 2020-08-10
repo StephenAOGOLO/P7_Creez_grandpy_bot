@@ -5,6 +5,7 @@ import time
 import logging as lg
 lg.basicConfig(level=lg.INFO)
 
+
 def get_coordinates_from_title(title):
     wikiUrl = "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&&format=json&titles="
     url = wikiUrl+title
