@@ -80,6 +80,8 @@ html, body
 }
 .loader-container
 {
+	opacity: 0;
+	/*visibility: hidden;*/
 	/*position: fixed;*/
 	position: absolute;
     top: 15%;
@@ -127,9 +129,16 @@ html, body
         transform: translate(-50%, -50%) /*rotate(630deg)*/rotate(630deg);
     }
 }
-.loader-container.hidden
+/*.loader-container.hidden
 {
     opacity: 0;
     visibility: hidden;
+    background-color: blue;
 }
 
+.loader-container.shown
+{
+    opacity: 1;
+    visibility: visible;
+    background-color: red;
+}*/
