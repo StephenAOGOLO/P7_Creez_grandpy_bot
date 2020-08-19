@@ -2,12 +2,10 @@
         {% include 'components/header.html'%}
         <form id="form-area">
             <div id="search-box">
-                <label class="your_text" for="recherche">Posez votre question.</label><br />
+                <label class="your_text" for="recherche">Ecrivez votre question ici.</label><br />
                 <input type="text" id ="research" name="research"/>
                 <input type="submit" />
             </div>
-            <script type="text/javascript" src="{{ url_for('static', filename='js/treatment.js') }}"></script>
-            <script type="text/javascript" src="{{ url_for('static', filename='js/mediawiki.js') }}"></script>
             <div id="response">
                 {{ response }}
             </div>
@@ -16,8 +14,6 @@
                 let map;
                 function initMap(){}
         </script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/gmap.js') }}"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo5fjwftbiDE2hvr8TY8jzUHJdSqA2Tu0&callback=initMap" type="text/javascript"></script>
         <div id="conteneur">
             <div id="place">
             </div>
@@ -26,6 +22,10 @@
             <div id="loader">
             </div>
         </div>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/treatment.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/mediawiki.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/gmap.js') }}"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo5fjwftbiDE2hvr8TY8jzUHJdSqA2Tu0&callback=initMap" type="text/javascript"></script>
             <script type="text/javascript" src="{{ url_for('static', filename='js/loading.js') }}"></script>
         </form>
     {% include 'components/footer.html'%}

@@ -10,7 +10,7 @@ lg.basicConfig(level=lg.INFO)
 @app.route('/')
 @app.route('/home')
 def home():
-    salutation = "Bien le bonjour !!! Vous êtes à la recherche d'informations sur un lieu? Bienvenue, je vais tenter de vous répondre."
+    salutation = "Bien le bonjour !! Je suis GrandPyBot!! Posez-moi une question et je vais tenter de vous répondre."
     response = "Je vais vous répondre ..."
     designer = "Stephen A.OGOLO - https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot.git"
     place = {"lat": 16.25, "lng": -61.58333333, "search": False}
