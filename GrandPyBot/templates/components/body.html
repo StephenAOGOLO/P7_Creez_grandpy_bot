@@ -2,9 +2,9 @@
         {% include 'components/header.html'%}
         <form id="form-area">
             <div id="search-box">
-                <label class="your_text" for="recherche">Ecrivez votre question ici.</label><br />
+                <!--<label class="your_text" for="recherche">Ecrivez votre question ici.</label><br />-->
                 <input type="text" id ="research" name="research"/>
-                <input type="submit" />
+                <input type="submit" id ="button" />
             </div>
             <div id="response">
                 {{ response }}
@@ -14,7 +14,7 @@
                 let map;
                 function initMap(){}
         </script>
-        <div id="conteneur">
+        <div id="place-container">
             <div id="place">
             </div>
         </div>
