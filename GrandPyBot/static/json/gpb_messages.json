@@ -1,0 +1,26 @@
+{
+  "header":
+        [
+          "Il faut savoir que ",
+          "Vérité générale : ",
+          "Saviez-vous que ",
+          "Tout le monde devrait savoir que ",
+          "Ah oui !!!!!! ",
+          "Biensur !!! ",
+          "Euuuuuuuuuuuuh !!, ",
+          "Si mes souvenirs sont bons !!! ",
+          "Hmmm !!! Il me semble que ... Oui c'est ça !!! ",
+          "Bien évidemment !!! "
+        ],
+  "footer":
+        [
+          " Normalement, cela se trouve sur la carte ci-dessous :  ",
+          " La dernière fois que j'en ai entendu parler, c'était là-bas !!!",
+          " Regarde donc sur cette carte !!!",
+          " J'ai un ami qui m'a dit que cela se trouve ici"
+        ],
+  "gpb":
+          [
+
+          ]
+}

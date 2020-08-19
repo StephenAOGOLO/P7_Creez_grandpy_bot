@@ -1,48 +1,32 @@
 <body>
-        <fieldset>
-        <legend class="GPB">GrandPyBot - by Stephen A.OGOLO</legend>
+        {% include 'components/header.html'%}
         <form id="form-area">
-            <h1>
-                {{ mot }}
-            </h1>
-            <p>
-                <label class="your_text" for="recherche">Que puis-je faire pour vous ?</label><br />
+            <div id="search-box">
+                <label class="your_text" for="recherche">Posez votre question.</label><br />
                 <input type="text" id ="research" name="research"/>
                 <input type="submit" />
-            </p>
+            </div>
             <script type="text/javascript" src="{{ url_for('static', filename='js/treatment.js') }}"></script>
             <script type="text/javascript" src="{{ url_for('static', filename='js/mediawiki.js') }}"></script>
             <div id="response">
                 {{ response }}
             </div>
-        <!--</form>
-        </fieldset>-->
         <script>
                 "use strict";
                 let map;
                 function initMap(){}
-
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/gmap.js') }}"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo5fjwftbiDE2hvr8TY8jzUHJdSqA2Tu0&callback=initMap" type="text/javascript"></script>
-        <div id="test">
-            <p>--- TEST VERSION---</p>
-        </div>
         <div id="conteneur">
             <div id="place">
             </div>
         </div>
-
-        </div>
         <div class="loader-container">
             <div id="loader">
-                ---- LOADER ----
             </div>
         </div>
             <script type="text/javascript" src="{{ url_for('static', filename='js/loading.js') }}"></script>
-            <!--<script type="text/javascript" src="{{ url_for('static', filename='js/endloading.js') }}"></script>-->
-
-<!--<script type="text/javascript" src="{{ url_for('static', filename='js/switcher.js') }}"></script>-->
         </form>
-        </fieldset>
+    {% include 'components/footer.html'%}
 </body>

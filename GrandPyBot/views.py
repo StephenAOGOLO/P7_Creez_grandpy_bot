@@ -10,18 +10,22 @@ lg.basicConfig(level=lg.INFO)
 @app.route('/')
 @app.route('/home')
 def home():
-    salutation = "bonjour"
+    salutation = "Bien le bonjour !!! Vous êtes à la recherche d'informations sur un lieu? Bienvenue, je vais tenter de vous répondre."
     response = "Je vais vous répondre ..."
+    designer = "Stephen A.OGOLO - https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot.git"
     place = {"lat": 16.25, "lng": -61.58333333, "search": False}
-    return render_template("/interface/page.html", mot=salutation, response=response, place=place)
+    #return render_template("/interface/page.html", mot=salutation, response=response, place=place)
+    return render_template("/interface/page.html", mot=salutation, designer=designer, place=place, response=response)
 
 
 @app.route('/catcher', methods=["POST"])
 def catcher():
+    response = {}
     user_entry = request.form["research"]
     if is_entry_empty(user_entry)["status"]:
-        return jsonify(is_entry_empty(user_entry)["text"])
-    response = entry_treatment(user_entry)
+        response["article"] = is_entry_empty(user_entry)["text"]
+    else:
+        response = entry_treatment(user_entry)
     return jsonify(response)
 
 

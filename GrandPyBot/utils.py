@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
 import requests as rqsts
 import json
+import random
 import time
 import logging as lg
 lg.basicConfig(level=lg.INFO)
+
+
+def gpb_messages(raw_text):
+    messages = open_json_file(".\\static\\json\\gpb_messages.json")
+    header = messages["header"]
+    footer = messages["footer"]
+    header = header[0]
+    footer = footer[0]
+    text = header+raw_text+footer
+    return text
 
 
 def get_coordinates(wiki_data, wiki_page_id, entry):
@@ -229,7 +240,7 @@ def is_entry_empty(text):
     if text == "":
         status = True
         text = "Pouvez-vous reformuler votre question ?"
-    report = {"status": status, "text": text}
+    report = {"status": status, "text": text, "article": text}
     return report
 
 
@@ -239,7 +250,8 @@ def entry_treatment(text):
     lg.info("\nMedia wiki API resqusting...\n")
     text = cleanup_text(text)
     if is_entry_empty(text)["status"]:
-        return is_entry_empty(text)["text"]
+        output["article"] = is_entry_empty(text)["text"]
+        return output
     output["info"] = get_info_from_title(text)
     output["page_id"] = get_page_id_from_data(output["info"])
     output["article"] = str(get_article_wiki_by_pageid(output["page_id"]))
@@ -267,8 +279,16 @@ def entry_treatment(text):
 
 if __name__ == "__main__":
     #pass
-    #entry_treatment("ou se trouve openclassrooms")
-    entry_treatment("bonjour ou se trouve montmartre")
+    #message = gpb_messages("Carnon également dénommé Carnon-Plage est une station balnéaire de l'Hérault située sur la commune de Mauguio1. Afin de bien mettre en avant son attachement avec sa station balnéaire, le site officiel de la mairie de Mauguio présente la commune sous l'appellation de « Mauguio-Carnon ».")
+    #print(message)
+    #print("fin de programme")
+
+
+
+
+    entry_treatment("ou se trouve openclassrooms")
+    #entry_treatment("bonjour ou se trouve montmartre")
+    #entry_treatment("")
     #data = coordinates_from_openstreetmap("openclassrooms")
     #for k, v in data.items():
     ##for i, e in enumerate(data):
@@ -276,7 +296,7 @@ if __name__ == "__main__":
     #print(data["lat"]+"\n"+data["lon"]+"\n")
     #result = get_coordinates("paris")
     #print(result)
-    print("fin")
+    print("\nfin")
 
     #data = {"place_id":71039865,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright","osm_type":"node","osm_id":6242758322,"boundingbox":["48.8747286","48.8748286","2.3504385","2.3505385"],"lat":"48.8747786","lon":"2.3504885","display_name":"OpenClassRooms, 7, Cité Paradis, Quartier de la Porte-Saint-Denis, Paris, Île-de-France, France métropolitaine, 75010, France","place_rank":30,"category":"office","type":"company","importance":0.101,"geojson":{"type":"Point","coordinates":[2.3504885,48.8747786]}}
     #liste = data.keys()
