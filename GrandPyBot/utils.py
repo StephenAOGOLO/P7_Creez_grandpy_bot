@@ -198,8 +198,17 @@ def is_word_in(first_list, second_list, delete=True):
     lg.info("\n_| Rapport de traitement de saisie |_ \n{}\n".format(dic_result.items()))
     return dic_result
 
+def secure_text(text):
+    #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
+    stop_words = stop_words_with_json()
+    for c in stop_words["xss"]:
+        if c in text:
+            text = text.replace(c, "")
+    lg.info("\nle texte saisie a été sécurisé avant son traitement\n")
+    return text
 
 def cleanup_text(text):
+    text = secure_text(text)
     hashed_text = hash_text(text)
     #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
     stop_words = stop_words_with_json()
@@ -258,6 +267,15 @@ def is_entry_empty(text):
     report = {"status": status, "text": text, "article": text}
     return report
 
+def is_wrong_entry(data):
+    status = True
+    text = ""
+    if len(data) == 0:
+        status = False
+        text = "Pouvez-vous reformuler votre question ?"
+    report = {"status": status, "text": text}
+    return report
+
 
 def entry_treatment(text):
     output = {}
@@ -268,6 +286,10 @@ def entry_treatment(text):
         output["article"] = is_entry_empty(text)["text"]
         return output
     output["info"] = get_info_from_title(text)
+    report = is_wrong_entry(output["info"])
+    if not report["status"]:
+        output["article"] = report["text"]
+        return output
     output["page_id"] = get_page_id_from_data(output["info"])
     output["article"] = str(get_article_wiki_by_pageid(output["page_id"]))
     lg.info("\nMedia wiki Response >>>> : " + output["article"]+"\n")
@@ -301,7 +323,8 @@ if __name__ == "__main__":
 
 
 
-    output = entry_treatment("pilat")
+    #output = entry_treatment('pilat')
+    output = entry_treatment('<script>alert("wow");</script>')
     #entry_treatment("bonjour ou se trouve montmartre")
     #entry_treatment("")
     #data = coordinates_from_openstreetmap("openclassrooms")
