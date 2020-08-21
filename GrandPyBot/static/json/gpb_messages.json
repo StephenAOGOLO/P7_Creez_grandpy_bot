@@ -6,7 +6,7 @@
           "Saviez-vous que ",
           "Tout le monde devrait savoir que ",
           "Ah oui !!!!!! ",
-          "Biensur !!! ",
+          "Mais bon sang mais c'est bien sûr !!! ",
           "Euuuuuuuuuuuuh !!, ",
           "Si mes souvenirs sont bons !!! ",
           "Hmmm !!! Il me semble que ... Oui c'est ça !!! ",
@@ -14,13 +14,46 @@
         ],
   "footer":
         [
-          " Normalement, cela se trouve sur la carte ci-dessous :  ",
-          " La dernière fois que j'en ai entendu parler, c'était là-bas !!!",
-          " Regarde donc sur cette carte !!!",
-          " J'ai un ami qui m'a dit que cela se trouve ici"
-        ],
-  "gpb":
-          [
+          "\n\nNormalement, cela se trouve sur la carte ... :  ",
+          "\n\nLa dernière fois que j'en ai entendu parler, c'était là-bas !!!",
+          "\n\nRegarde donc sur cette carte !!!",
+          "\n\nJ'ai un ami qui m'a dit que cela se trouve ici",
+          "\n\nSur la carte, le lieu tu trouveras.",
+          "\n\nVoici le lieu que tu m'as demandé.",
+          "\n\nGoogle est mon ami ! Regarde la Map !",
+          "\n\nTu peux zoomer et dézoomer sur la Map",
+          "\n\nTu demande un lieu à GrandPyBot et il te l'affiche sur une carte",
+          "\n\n;-) , La réponse de GrandPyBot en image, ;-)  "
 
-          ]
+        ],
+  "gpb": "\n\nTu sais, j'adore composer des haikus avec les questions que l'ont me pose.\nVoici celui que j'ai composé à l'instant:\n\n",
+  "gpb_1":
+          [
+            "... tel que je te connais,",
+            "... depuis bien longtemps,",
+            "... après quelques temps,",
+            "... au fur et à mesure,",
+            "... lorsque l'on parle de toi,",
+            "... quand certains veulent te connaitre,"
+          ],
+  "gpb_2":
+          [
+            "\nTa présence nous rassure,",
+            "\nOn aime te personnifier,",
+            "\nIls chercheront toujours à te connaître,",
+            "\nCertains pensent beaucoup à toi,",
+            "\nJ'aime te citer dans mes Haikus,",
+            "\nTu alimentes bien des questions,"
+          ],
+  "gpb_3":
+          [
+            "\nGoogle ne sait pas tout sur toi.",
+            "\nCertains ont essayé... Ils ont eu des problèmes.",
+            "\nBientôt.. Je serai aussi célèbre que toi.",
+            "\nJe suis optimiste vis-à-vis de ton avenir.",
+            "\nOn devrait parler de toi plus souvent.",
+            "\nJe dédie mon existence à ta recherche."
+          ],
+  "gpb_4": "\n\nTu as aimer cet haiku ? je peux en composer d'autres si tu appuies encore sur le boutton."
+
 }

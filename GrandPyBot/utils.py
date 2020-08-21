@@ -1,19 +1,30 @@
 # -*- coding: utf-8 -*-
 import requests as rqsts
 import json
-import random
+import random as rd
 import time
 import logging as lg
 lg.basicConfig(level=lg.INFO)
 
 
-def gpb_messages(raw_text):
-    messages = open_json_file(".\\static\\json\\gpb_messages.json")
+def gpb_messages(title, raw_text, file=".\\GrandPyBot\\static\\json\\gpb_messages.json"):
+    messages = open_json_file(file)
+    chance_h = rd.randrange(0, 10)
+    chance_f = rd.randrange(0, 10)
+    chance_h1 = rd.randrange(0, 6)
+    chance_h2 = rd.randrange(0, 6)
+    chance_h3 = rd.randrange(0, 6)
     header = messages["header"]
     footer = messages["footer"]
-    header = header[0]
-    footer = footer[0]
-    text = header+raw_text+footer
+    header = header[chance_h]
+    footer = footer[chance_f]
+    h = messages["gpb"]
+    h1 = title+messages["gpb_1"][chance_h1]
+    h2 = messages["gpb_2"][chance_h2]
+    h3 = messages["gpb_3"][chance_h3]
+    h4 = messages["gpb_4"]
+    haiku = h+h1+h2+h3+h4
+    text = header+raw_text+haiku+footer
     return text
 
 
@@ -107,7 +118,11 @@ def get_article_wiki_by_pageid(page_id):
     lg.debug(">> 2.1 - valeur: {}\n".format(dict_data))
     data = dict_data.json()
     lg.debug(">> 3.1 - valeur: {}\n".format(data))
-    return data["query"]["pages"][page_id]["extract"]
+    article = data["query"]["pages"][page_id]["extract"]
+    title = data["query"]["pages"][page_id]["title"]
+    article = gpb_messages(title, article)
+    #article = gpb_messages(title, article, ".\\static\\json\\gpb_messages.json")
+    return article
 
 
 def is_word_bad(first_list, second_list, delete=True):
@@ -270,7 +285,7 @@ def entry_treatment(text):
     elif result["api"] == "osm":
         location["lng"] = data["lon"]
         location["lat"] = data["lat"]
-    location["zoom"] = 4
+    location["zoom"] = 10
     location["search"] = True
     output["place"] = location
     lg.info("\nOUTPUT:\n{}\n".format(output))
@@ -286,7 +301,7 @@ if __name__ == "__main__":
 
 
 
-    entry_treatment("ou se trouve openclassrooms")
+    output = entry_treatment("pilat")
     #entry_treatment("bonjour ou se trouve montmartre")
     #entry_treatment("")
     #data = coordinates_from_openstreetmap("openclassrooms")
@@ -296,6 +311,7 @@ if __name__ == "__main__":
     #print(data["lat"]+"\n"+data["lon"]+"\n")
     #result = get_coordinates("paris")
     #print(result)
+    print(output["article"])
     print("\nfin")
 
     #data = {"place_id":71039865,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright","osm_type":"node","osm_id":6242758322,"boundingbox":["48.8747286","48.8748286","2.3504385","2.3505385"],"lat":"48.8747786","lon":"2.3504885","display_name":"OpenClassRooms, 7, Cité Paradis, Quartier de la Porte-Saint-Denis, Paris, Île-de-France, France métropolitaine, 75010, France","place_rank":30,"category":"office","type":"company","importance":0.101,"geojson":{"type":"Point","coordinates":[2.3504885,48.8747786]}}

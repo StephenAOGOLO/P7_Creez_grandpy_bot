@@ -4,11 +4,14 @@
             <div id="search-box">
                 <!--<label class="your_text" for="recherche">Ecrivez votre question ici.</label><br />-->
                 <input type="text" id ="research" name="research"/>
-                <input type="submit" id ="button" />
+                <div id ="button"><input type="image"  src="{{ url_for('static', filename='png/gpb.png') }}" /></div>
             </div>
-            <div id="response">
-                {{ response }}
-            </div>
+            <!--<p>
+				<textarea>Le texte</textarea><br />
+			</p>-->
+            <!--<div id="response">-->
+                <textarea id="response">{{ response }}</textarea><br />
+            <!--</div>-->
         <script>
                 "use strict";
                 let map;
