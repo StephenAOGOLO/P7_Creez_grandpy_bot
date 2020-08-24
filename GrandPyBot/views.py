@@ -2,6 +2,7 @@ from . import app
 from flask import render_template, jsonify, request
 from .utils import *
 import logging as lg
+from . import config
 lg.basicConfig(level=lg.INFO)
 
 
@@ -27,6 +28,8 @@ def catcher():
         response["article"] = is_entry_empty(user_entry)["text"]
     else:
         response = entry_treatment(user_entry)
+        response["gmap_id"] = str(config.GMAP_ID)
+        print("fin")
     return jsonify(response)
 
 
