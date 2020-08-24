@@ -6,8 +6,6 @@ from . import config
 lg.basicConfig(level=lg.INFO)
 
 
-@app.route('/here')
-@app.route('/index')
 @app.route('/')
 @app.route('/home')
 def home():
@@ -15,12 +13,9 @@ def home():
     gmap_url = "https://maps.googleapis.com/maps/api/js?callback=initMap&key="
     gmap_url = gmap_url + gmap_id
     salutation = "Bien le bonjour !! Je suis GrandPyBot!! Posez-moi une question et je vais tenter de vous répondre."
-    #response = "Je vais vous répondre ..."
-    response = ""
     designer = "Stephen A.OGOLO - https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot.git"
     place = {"lat": 16.25, "lng": -61.58333333, "search": False}
-    #return render_template("/interface/page.html", mot=salutation, response=response, place=place)
-    return render_template("/interface/page.html", mot=salutation, designer=designer, place=place, response=response, gmap_url=gmap_url)
+    return render_template("/interface/page.html", mot=salutation, designer=designer, place=place, gmap_url=gmap_url)
 
 
 @app.route('/catcher', methods=["POST"])
@@ -34,14 +29,6 @@ def catcher():
         response["gmap_id"] = str(config.GMAP_ID)
         print("fin")
     return jsonify(response)
-
-
-#@app.route('/build_map')
-#def build_map():
-#    gmap_id = str(config.GMAP_ID)
-#    gmap_url = "https://maps.googleapis.com/maps/api/js?callback=initMap&key="
-#    gmap_url = gmap_url+gmap_id
-#    return render_template(gmap_url=gmap_url)
 
 
 @app.errorhandler(404)

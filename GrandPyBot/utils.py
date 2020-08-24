@@ -2,7 +2,6 @@
 import requests as rqsts
 import json
 import random as rd
-import time
 import logging as lg
 lg.basicConfig(level=lg.INFO)
 
@@ -59,7 +58,6 @@ def get_coordinates_from_wiki(title):
     data = rqsts.get(url)
     data = data.json()
     all_data = data["query"]["pages"]
-    #all_data["coordinates"] = data[]
     return all_data
 
 
@@ -254,10 +252,6 @@ def stop_words_with_json(file=".\\GrandPyBot\\static\\json\\bad_words.json"):
     return stop_words
 
 
-def regulate_zoom(location):
-    pass
-
-
 def is_entry_empty(text):
     status = False
     text = text.strip()
@@ -266,6 +260,7 @@ def is_entry_empty(text):
         text = "Pouvez-vous reformuler votre question ?"
     report = {"status": status, "text": text, "article": text}
     return report
+
 
 def is_wrong_entry(data):
     status = True
@@ -297,7 +292,6 @@ def entry_treatment(text):
     info = output["info"]
     page_id = output["page_id"]
     wiki_data = info[0]["title"]
-    # data = get_coordinates_from_wiki(info[0]["title"])
     result = get_coordinates(wiki_data, page_id, text)
     data = result["data"]
     location = {}
@@ -315,32 +309,4 @@ def entry_treatment(text):
 
 
 if __name__ == "__main__":
-    #pass
-    #message = gpb_messages("Carnon également dénommé Carnon-Plage est une station balnéaire de l'Hérault située sur la commune de Mauguio1. Afin de bien mettre en avant son attachement avec sa station balnéaire, le site officiel de la mairie de Mauguio présente la commune sous l'appellation de « Mauguio-Carnon ».")
-    #print(message)
-    #print("fin de programme")
-
-
-
-
-    #output = entry_treatment('pilat')
-    output = entry_treatment('<script>alert("wow");</script>')
-    #entry_treatment("bonjour ou se trouve montmartre")
-    #entry_treatment("")
-    #data = coordinates_from_openstreetmap("openclassrooms")
-    #for k, v in data.items():
-    ##for i, e in enumerate(data):
-    #    print("{} --- {}\n".format(k, v))
-    #print(data["lat"]+"\n"+data["lon"]+"\n")
-    #result = get_coordinates("paris")
-    #print(result)
-    print(output["article"])
-    print("\nfin")
-
-    #data = {"place_id":71039865,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright","osm_type":"node","osm_id":6242758322,"boundingbox":["48.8747286","48.8748286","2.3504385","2.3505385"],"lat":"48.8747786","lon":"2.3504885","display_name":"OpenClassRooms, 7, Cité Paradis, Quartier de la Porte-Saint-Denis, Paris, Île-de-France, France métropolitaine, 75010, France","place_rank":30,"category":"office","type":"company","importance":0.101,"geojson":{"type":"Point","coordinates":[2.3504885,48.8747786]}}
-    #liste = data.keys()
-    #if "coordinates" in data.keys():
-    #    print("ok")
-    #else:
-    #    print("ko")
-    #print("fin")
+    pass
