@@ -184,6 +184,7 @@ html
     }
     body
     {
+        /*background-color: orange;*/
         height: 100%;
     }
     #form-area
@@ -254,11 +255,13 @@ html
     }
 }
 /*For every horizontal mobile screens*/
-@media screen and (max-height: 660px)
+/*@media screen and (max-height: 660px)*/
+@media screen and (max-height: 800px)
 {
 
     body
     {
+        /*background-color: pink;*/
         height: 660px;
     }
     header
@@ -301,6 +304,17 @@ html
 	    top: 30%;
 	    left: 55%;
 
+    }
+    #place
+    {
+	    height: 100%;
+	    display: flex;
+	    flex-direction: row;
+	    flex-wrap: wrap;
+	    justify-content : space-around;
+	    align-items: center;
+	    height: 100%;
+	    width: 100%;
     }
     #response
     {
