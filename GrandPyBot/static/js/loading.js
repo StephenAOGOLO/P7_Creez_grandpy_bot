@@ -7,7 +7,7 @@
     function showContent()
     {
         startLoading;
-        document.querySelector(".loader-container").style.opacity = 1;setTimeout(maskContent, 5000);
+        document.querySelector(".loader-container").style.opacity = 1;setTimeout(maskContent, 4000);
     }
     function stopLoading()
     {
