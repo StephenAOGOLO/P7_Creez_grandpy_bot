@@ -17,7 +17,6 @@
     }
     function startLoading()
     {
-        //document.querySelector(".loader-container").style.height = '120%';
         document.querySelector(".loader-container").style.height = '90%';
         document.querySelector(".loader-container").style.width = '100%';
         document.querySelector(".loader-container").style.top = '30%';

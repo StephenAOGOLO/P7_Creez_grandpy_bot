@@ -1,3 +1,25 @@
+#return-gpb
+{
+    background-color: rgb(120,130,240);
+    color: white;
+    font-size: 30px;
+}
+#error
+{
+    background-color: rgb(120,130,240);
+}
+#error-page
+{
+    height: 100%;
+    background-color: rgb(120,100,240);
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content : space-around;
+	align-items: center;
+	font-size: 30px;
+	color: white;
+}
 #oc-logo-right
 {
     position: absolute;
@@ -63,9 +85,6 @@ header
 }
 #form-area
 {
-        /*height:500px;*/
-
-        /*position: relative;*/
         position: absolute;
         height: 50%;
         width: 100%;
@@ -137,7 +156,6 @@ html
 
 #loader
 {
-
     height: 100px;
     width: 100px;
     border: 50px solid purple;
@@ -184,7 +202,6 @@ html
     }
     body
     {
-        /*background-color: orange;*/
         height: 100%;
     }
     #form-area
@@ -255,13 +272,11 @@ html
     }
 }
 /*For every horizontal mobile screens*/
-/*@media screen and (max-height: 660px)*/
 @media screen and (max-height: 800px)
 {
 
     body
     {
-        /*background-color: pink;*/
         height: 660px;
     }
     header
@@ -346,7 +361,6 @@ html
     body
     {
         height: 100%;
-        /*background-color: yellow;*/
     }
     #response
     {
