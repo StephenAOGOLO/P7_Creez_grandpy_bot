@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-*.idea
+/.idea
 /.pytest_cache
 /00_auto_install
 /backup
