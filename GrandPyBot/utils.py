@@ -7,55 +7,65 @@
     - It provides prepared APIs responses to the "views.py" module."""
 # -*- coding: utf-8 -*-
 import logging as lg
-import requests as rqsts
 import json
 import random as rd
+import requests as rqsts
 import GrandPyBot.options as opt
 lg.basicConfig(level=lg.INFO)
 
 
 class Loading:
+    """
+    This class manage data parameters stored in a external file.
+    """
     def __init__(self):
+        """
+        This constructor create a instance
+        which contains all the data from a file ini.
+        """
         the_options = opt.Settings()
         self.msg = the_options.get_data_file_ini("msg")
         self.api = the_options.get_data_file_ini("api")
         self.parse = the_options.get_data_file_ini("parse")
-        self.gpb_msg = self.msg["gpb_msg"]
-        self.wiki_coordinates = self.api["wiki_coordinates"]
-        self.osm_coordinates = self.api["osm_coordinates"]
-        self.wiki_info_from_title = self.api["wiki_info_from_title"]
-        self.wiki_art_by_pageid = self.api["wiki_art_by_pageid"]
         self.stop_words = self.parse["stop_words"]
 
     def gpb_messages(self, title, raw_text):
-        messages = open_json_file(self.gpb_msg)
-        chance_h = rd.randrange(0, 10)
-        chance_f = rd.randrange(0, 10)
-        chance_h1 = rd.randrange(0, 6)
-        chance_h2 = rd.randrange(0, 6)
-        chance_h3 = rd.randrange(0, 6)
+        """ This method provides personal messages into the GPB response """
+        gpb_msg = self.msg["gpb_msg"]
+        messages = open_json_file(gpb_msg)
+        h_1 = rd.randrange(0, 10)
+        f_1 = rd.randrange(0, 10)
+        h10 = rd.randrange(0, 6)
+        h20 = rd.randrange(0, 6)
+        h30 = rd.randrange(0, 6)
         header = messages["header"]
         footer = messages["footer"]
-        header = header[chance_h]
-        footer = footer[chance_f]
-        h = messages["gpb"]
-        h1 = title+messages["gpb_1"][chance_h1]
-        h2 = messages["gpb_2"][chance_h2]
-        h3 = messages["gpb_3"][chance_h3]
-        h4 = messages["gpb_4"]
-        haiku = h+h1+h2+h3+h4
+        header = header[h_1]
+        footer = footer[f_1]
+        h_1 = messages["gpb"]
+        h10 = title+messages["gpb_1"][h10]
+        h20 = messages["gpb_2"][h20]
+        h30 = messages["gpb_3"][h30]
+        h40 = messages["gpb_4"]
+        haiku = h_1+h10+h20+h30+h40
         text = header+raw_text+haiku+footer
         return text
 
     def get_coordinates_from_wiki(self, title):
-        url = self.wiki_coordinates+title
+        """ This method obtain longitude and latitude
+        from a WikiPedia title """
+        wiki_coordinates = self.api["wiki_coordinates"]
+        url = wiki_coordinates+title
         data = rqsts.get(url)
         data = data.json()
         all_data = data["query"]["pages"]
         return all_data
 
     def get_coordinates_from_osm(self, title):
-        url = self.osm_coordinates + title
+        """ This method obtain longitude and latitude
+        from OpenStreetMap Api """
+        osm_coordinates = self.api["osm_coordinates"]
+        url = osm_coordinates + title
         data = rqsts.get(url)
         data = data.json()
         data = data[0]
@@ -67,144 +77,49 @@ class Loading:
         return all_data
 
     def get_info_from_title(self, title):
-        url = self.wiki_info_from_title + str(title)
+        """ This method obtain all raw informations from WikiPedia title """
+        wiki_info_from_title = self.api["wiki_info_from_title"]
+        url = wiki_info_from_title + str(title)
         all_data = rqsts.get(url)
         all_data = all_data.json()
         dict_data = {}
         try:
             all_data = all_data["query"]["search"]
             list_data = all_data
-            for i, e in enumerate(list_data):
-                dict_data[i] = e
-            lg.debug("\n")
-            lg.debug("Voici le contenu du dictionnaire :")
-            lg.debug("\n")
-            for k, v in dict_data.items():
-                lg.debug("{} ----> {}".format(k, v))
-        except Exception as e:
-            lg.info("Erreur sur clé query : {}".format(e))
+            for i_1, e_1 in enumerate(list_data):
+                dict_data[i_1] = e_1
+        except Exception as e_1:
+            lg.info("Erreur sur clé query : %s", e_1)
         return dict_data
 
     def get_article_wiki_by_pageid(self, page_id):
-        """ paris = pageids=681159"""
+        """ This method obtain the relative article
+        with a WikiPedia page id """
+        wiki_art_by_pageid = self.api["wiki_art_by_pageid"]
         page_id = str(page_id)
-        url = self.wiki_art_by_pageid + page_id
+        url = wiki_art_by_pageid + page_id
         data_raw = rqsts.get(url)
-        lg.debug(">> 1.1 - type: {}\n".format(type(data_raw)))
-        lg.debug(">> 1.1 - valeur: {}\n".format(data_raw))
         dict_data = data_raw
-        lg.debug(">> 2.1 - type: {}\n".format(type(dict_data)))
-        lg.debug(">> 2.1 - valeur: {}\n".format(dict_data))
         data = dict_data.json()
-        lg.debug(">> 3.1 - valeur: {}\n".format(data))
         article = data["query"]["pages"][page_id]["extract"]
         title = data["query"]["pages"][page_id]["title"]
         article = self.gpb_messages(title, article)
-        # article = gpb_messages(title, article)
-        ##article = gpb_messages(title, article, ".\\static\\json\\gpb_messages.json")
         return article
 
     def stop_words_with_json(self):
+        """ This method provides all the forbidden characters """
         stop_words = open_json_file(self.stop_words)
         return stop_words
 
 
-#def stop_words_with_json(file=".\\GrandPyBot\\static\\json\\bad_words.json"):
-#    stop_words = open_json_file(file)
-#    return stop_words
-
-#def get_article_wiki_by_pageid(page_id):
-#    """ paris = pageids=681159"""
-#    load = Loading()
-#    wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exsentences=2&explaintext=true&pageids='
-#    page_id = str(page_id)
-#    url = wikiUrl+page_id
-#    data_raw = rqsts.get(url)
-#    lg.debug(">> 1.1 - type: {}\n".format(type(data_raw)))
-#    lg.debug(">> 1.1 - valeur: {}\n".format(data_raw))
-#    dict_data = data_raw
-#    lg.debug(">> 2.1 - type: {}\n".format(type(dict_data)))
-#    lg.debug(">> 2.1 - valeur: {}\n".format(dict_data))
-#    data = dict_data.json()
-#    lg.debug(">> 3.1 - valeur: {}\n".format(data))
-#    article = data["query"]["pages"][page_id]["extract"]
-#    title = data["query"]["pages"][page_id]["title"]
-#    load = Loading()
-#    article = load.gpb_messages(title, article)
-#    #article = gpb_messages(title, article)
-#    ##article = gpb_messages(title, article, ".\\static\\json\\gpb_messages.json")
-#    return article
-
-
-#def get_info_from_title(title):
-#    wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch='
-#    url = wikiUrl + str(title)
-#    all_data = rqsts.get(url)
-#    all_data = all_data.json()
-#    dict_data = {}
-#    try:
-#        all_data = all_data["query"]["search"]
-#        list_data = all_data
-#        for i, e in enumerate(list_data):
-#            dict_data[i] = e
-#        lg.debug("\n")
-#        lg.debug("Voici le contenu du dictionnaire :")
-#        lg.debug("\n")
-#        for k, v in dict_data.items():
-#            lg.debug("{} ----> {}".format(k, v))
-#    except Exception as e:
-#        lg.info("Erreur sur clé query : {}".format(e))
-#    return dict_data
-
-#def get_coordinates_from_osm(title):
-#    osm_url = "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2&q="
-#    url = osm_url + title
-#    data = rqsts.get(url)
-#    data = data.json()
-#    data = data[0]
-#    all_data = {
-#        "all": data,
-#        "coordinates": data["geojson"],
-#        "lat": float(data["lat"]),
-#        "lon": float(data["lon"])}
-#    return all_data
-
-#def get_coordinates_from_wiki(title):
-#    wikiUrl = "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&&format=json&titles="
-#    url = wikiUrl+title
-#    data = rqsts.get(url)
-#    data = data.json()
-#    all_data = data["query"]["pages"]
-#    return all_data
-
-#def gpb_messages(title, raw_text, file=".\\GrandPyBot\\static\\json\\gpb_messages.json"):
-#    messages = open_json_file(file)
-#    chance_h = rd.randrange(0, 10)
-#    chance_f = rd.randrange(0, 10)
-#    chance_h1 = rd.randrange(0, 6)
-#    chance_h2 = rd.randrange(0, 6)
-#    chance_h3 = rd.randrange(0, 6)
-#    header = messages["header"]
-#    footer = messages["footer"]
-#    header = header[chance_h]
-#    footer = footer[chance_f]
-#    h = messages["gpb"]
-#    h1 = title+messages["gpb_1"][chance_h1]
-#    h2 = messages["gpb_2"][chance_h2]
-#    h3 = messages["gpb_3"][chance_h3]
-#    h4 = messages["gpb_4"]
-#    haiku = h+h1+h2+h3+h4
-#    text = header+raw_text+haiku+footer
-#    return text
-
-
 def get_coordinates(wiki_data, wiki_page_id, entry):
+    """ This function report coordinates status
+    from WikiPedia and OpenStreetMap Apis """
     load = Loading()
     status = False
     api = ""
     api_data = ""
     data_wiki = load.get_coordinates_from_wiki(wiki_data)
-    #data_wiki = get_coordinates_from_wiki(wiki_data)
     data_osm = load.get_coordinates_from_osm(entry)
     if check_coordinates(data_wiki[str(wiki_page_id)]):
         api = "wiki"
@@ -219,64 +134,54 @@ def get_coordinates(wiki_data, wiki_page_id, entry):
 
 
 def check_coordinates(data):
+    """ This function verifies if coordinates have been found """
     status = False
     if "coordinates" in data.keys():
         status = True
     return status
 
 
-
-
-
-
-
-
-
-
-
 def get_page_id_from_data(all_data):
+    """ This function obtain the page id from a WikiPedia raw data """
     return all_data[0]["pageid"]
 
 
-
-
-
 def is_word_bad(first_list, second_list, delete=True):
+    """ This function parses a text to provided only essential data """
     found = ""
     presence = 0
     status_presence = False
     raw_text = " ".join(first_list)
-    for i1, e1 in enumerate(first_list):
-        length_to_check = len(e1)
+    for e_1 in first_list:
+        length_to_check = len(e_1)
         if length_to_check < 10:
-            for i2, e2 in enumerate(second_list[str(length_to_check)]):
-                e2 = e2.replace("\n", "")
-                if e1.lower() == e2.lower():
-                    found += e1+" "
+            for e_2 in second_list[str(length_to_check)]:
+                e_2 = e_2.replace("\n", "")
+                if e_1.lower() == e_2.lower():
+                    found += e_1+" "
                     presence += 1
         else:
-            for i2, e2 in enumerate(second_list["over_ten"]):
-                e2 = e2.replace("\n", "")
-                if e1.lower() == e2.lower():
-                    found += e1+" "
+            for e_2 in second_list["over_ten"]:
+                e_2 = e_2.replace("\n", "")
+                if e_1.lower() == e_2.lower():
+                    found += e_1+" "
                     presence += 1
     try:
         if delete:
             bad_words = found.split()
             count = {}.fromkeys(set(bad_words), 0)
-            for w in bad_words:
-                count[w] += 1
-            for k, v in count.items():
-                if v > 1:
-                    for i in range(v-1):
-                        bad_words.remove(k)
+            for w_1 in bad_words:
+                count[w_1] += 1
+            for k_1, v_1 in count.items():
+                if v_1 > 1:
+                    for i_1 in range(v_1 - 1):
+                        bad_words.remove(k_1)
             for words in bad_words:
                 occurences = first_list.count(words)
-                for i in range(occurences):
+                for i_1 in range(occurences):
                     first_list.remove(words)
-    except Exception as e:
-        lg.warning("erreur sur fonction 'is_bad_word()'\n>>{}".format(e))
-
+    except Exception as e_1:
+        lg.warning("erreur sur fonction 'is_bad_word()'\n>>%s", e_1)
     if presence > 0:
         status_presence = True
     treated_text = " ".join(first_list)
@@ -284,51 +189,24 @@ def is_word_bad(first_list, second_list, delete=True):
                   "text_after": treated_text,
                   "bad_words_presence": status_presence,
                   "bad_words": bad_words}
-    lg.info("\n_| Rapport de traitement de saisie |_ \n{}\n".format(dic_result.items()))
     return dic_result
 
-
-def is_word_in(first_list, second_list, delete=True):
-    found = ""
-    presence = 0
-    status_presence = False
-    raw_text = " ".join(first_list)
-    for i1, e1 in enumerate(first_list):
-        for i2, e2 in enumerate(second_list):
-            e2 = e2.replace("\n", "")
-            if e1.lower() == e2.lower():
-                found += e1+" "
-                presence += 1
-    if delete:
-        bad_words = found.split()
-        for words in bad_words:
-            first_list.remove(words)
-
-    if presence > 0:
-        status_presence = True
-    treated_text = " ".join(first_list)
-    dic_result = {"text_before": raw_text,
-                  "text_after": treated_text,
-                  "bad_words_presence": status_presence,
-                  "bad_words": bad_words}
-    lg.info("\n_| Rapport de traitement de saisie |_ \n{}\n".format(dic_result.items()))
-    return dic_result
 
 def secure_text(text):
-    #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
+    """ This function handles XSS breaches """
     load = Loading()
     stop_words = load.stop_words_with_json()
-    for c in stop_words["xss"]:
-        if c in text:
-            text = text.replace(c, "")
-    lg.info("\nle texte saisie a été sécurisé avant son traitement\n")
+    for c_1 in stop_words["xss"]:
+        if c_1 in text:
+            text = text.replace(c_1, "")
     return text
 
+
 def cleanup_text(text):
+    """ This function handles the parsing functions """
     load = Loading()
     text = secure_text(text)
     hashed_text = hash_text(text)
-    #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
     stop_words = load.stop_words_with_json()
     treatment_report = is_word_bad(hashed_text, stop_words)
     cleaned_word = treatment_report["text_after"]
@@ -336,41 +214,20 @@ def cleanup_text(text):
 
 
 def hash_text(text):
+    """ This function transfoms text entry into a treatable text """
     return str(text).split()
 
 
 def open_json_file(json_file):
-    """'open_json_file' method read a given json file.
+    """'open_json_file' function read a given json file.
     It returns the content file into a dict."""
     with open(json_file, encoding="utf-8") as file:
         data = json.load(file)
     return data
 
 
-def open_file(path_fichier):
-    """ Fonction d'ouverture d'un fichier
-                        et
-        sauvegrade du contenu en mémoire
-
-    :param path_fichier:
-    :return liste_fichier: """
-
-    with open(path_fichier,"rt") as fichier:
-        liste_fichier = fichier.readlines()
-    lg.debug("=" * 150)
-    lg.debug("\nVoici le contenu du fichier : {}\n".format(path_fichier))
-    for indice, ligne in enumerate(liste_fichier):
-        lg.debug("ligne {} : {}".format(indice, ligne))
-    lg.debug("=" * 150)
-    lg.debug("\nFin de fichier\n")
-    lg.debug("=" * 150)
-    return liste_fichier
-
-
-
-
-
 def is_entry_empty(text):
+    """ This function checks if no words is given for search """
     status = False
     text = text.strip()
     if text == "":
@@ -381,6 +238,7 @@ def is_entry_empty(text):
 
 
 def is_wrong_entry(data):
+    """ This function checks if only bad words is given for search """
     status = True
     text = ""
     if len(data) == 0:
@@ -390,11 +248,23 @@ def is_wrong_entry(data):
     return report
 
 
+def choose_geocoding(data, result, page_id):
+    """ This function reports which geocoding Api is used """
+    location = {}
+    if result["api"] == "wiki":
+        location["lng"] = data[str(page_id)]["coordinates"][0]["lon"]
+        location["lat"] = data[str(page_id)]["coordinates"][0]["lat"]
+    elif result["api"] == "osm":
+        location["lng"] = data["lon"]
+        location["lat"] = data["lat"]
+    return location
+
+
 def entry_treatment(text):
+    """ This function handles the whole process
+     from the received text entry to the Apis response """
     output = {}
     load = Loading()
-    lg.info("\nUser Entry >>>> : " + text)
-    lg.info("\nMedia wiki API resqusting...\n")
     text = cleanup_text(text)
     if is_entry_empty(text)["status"]:
         output["article"] = is_entry_empty(text)["text"]
@@ -406,26 +276,14 @@ def entry_treatment(text):
         return output
     output["page_id"] = get_page_id_from_data(output["info"])
     output["article"] = str(load.get_article_wiki_by_pageid(output["page_id"]))
-    lg.info("\nMedia wiki Response >>>> : " + output["article"]+"\n")
-    lg.debug("type response: {}\n".format(type(output["article"])))
     info = output["info"]
     page_id = output["page_id"]
     wiki_data = info[0]["title"]
     result = get_coordinates(wiki_data, page_id, text)
     data = result["data"]
-    location = {}
-    if result["api"] == "wiki":
-        location["lng"] = data[str(page_id)]["coordinates"][0]["lon"]
-        location["lat"] = data[str(page_id)]["coordinates"][0]["lat"]
-    elif result["api"] == "osm":
-        location["lng"] = data["lon"]
-        location["lat"] = data["lat"]
+    location = choose_geocoding(data, result, page_id)
     location["zoom"] = 10
     location["search"] = True
     output["place"] = location
-    lg.info("\nOUTPUT:\n{}\n".format(output))
+    lg.info("\nOUTPUT:\n%s\n", output)
     return output
-
-
-if __name__ == "__main__":
-    pass

@@ -4,12 +4,10 @@
     - It mainly catching and sending data
      from and towards the application front-side. """
 # -*- coding: utf-8 -*-
-from . import app
 from flask import render_template, jsonify, request
+from . import app
 from .utils import is_entry_empty, entry_treatment
-import logging as lg
 from . import config
-lg.basicConfig(level=lg.INFO)
 
 
 @app.route('/')
