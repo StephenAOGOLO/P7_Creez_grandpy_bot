@@ -1,0 +1,2 @@
+web: gunicorn GrandPyBot:app
+init: FLASK_APP=main.py
