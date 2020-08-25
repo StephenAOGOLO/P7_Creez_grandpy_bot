@@ -6,40 +6,206 @@
     - It formats the APIs response.
     - It provides prepared APIs responses to the "views.py" module."""
 # -*- coding: utf-8 -*-
+import logging as lg
 import requests as rqsts
 import json
 import random as rd
-import logging as lg
+import GrandPyBot.options as opt
 lg.basicConfig(level=lg.INFO)
 
 
-def gpb_messages(title, raw_text, file=".\\GrandPyBot\\static\\json\\gpb_messages.json"):
-    messages = open_json_file(file)
-    chance_h = rd.randrange(0, 10)
-    chance_f = rd.randrange(0, 10)
-    chance_h1 = rd.randrange(0, 6)
-    chance_h2 = rd.randrange(0, 6)
-    chance_h3 = rd.randrange(0, 6)
-    header = messages["header"]
-    footer = messages["footer"]
-    header = header[chance_h]
-    footer = footer[chance_f]
-    h = messages["gpb"]
-    h1 = title+messages["gpb_1"][chance_h1]
-    h2 = messages["gpb_2"][chance_h2]
-    h3 = messages["gpb_3"][chance_h3]
-    h4 = messages["gpb_4"]
-    haiku = h+h1+h2+h3+h4
-    text = header+raw_text+haiku+footer
-    return text
+class Loading:
+    def __init__(self):
+        the_options = opt.Settings()
+        self.msg = the_options.get_data_file_ini("msg")
+        self.api = the_options.get_data_file_ini("api")
+        self.parse = the_options.get_data_file_ini("parse")
+        self.gpb_msg = self.msg["gpb_msg"]
+        self.wiki_coordinates = self.api["wiki_coordinates"]
+        self.osm_coordinates = self.api["osm_coordinates"]
+        self.wiki_info_from_title = self.api["wiki_info_from_title"]
+        self.wiki_art_by_pageid = self.api["wiki_art_by_pageid"]
+        self.stop_words = self.parse["stop_words"]
+
+    def gpb_messages(self, title, raw_text):
+        messages = open_json_file(self.gpb_msg)
+        chance_h = rd.randrange(0, 10)
+        chance_f = rd.randrange(0, 10)
+        chance_h1 = rd.randrange(0, 6)
+        chance_h2 = rd.randrange(0, 6)
+        chance_h3 = rd.randrange(0, 6)
+        header = messages["header"]
+        footer = messages["footer"]
+        header = header[chance_h]
+        footer = footer[chance_f]
+        h = messages["gpb"]
+        h1 = title+messages["gpb_1"][chance_h1]
+        h2 = messages["gpb_2"][chance_h2]
+        h3 = messages["gpb_3"][chance_h3]
+        h4 = messages["gpb_4"]
+        haiku = h+h1+h2+h3+h4
+        text = header+raw_text+haiku+footer
+        return text
+
+    def get_coordinates_from_wiki(self, title):
+        url = self.wiki_coordinates+title
+        data = rqsts.get(url)
+        data = data.json()
+        all_data = data["query"]["pages"]
+        return all_data
+
+    def get_coordinates_from_osm(self, title):
+        url = self.osm_coordinates + title
+        data = rqsts.get(url)
+        data = data.json()
+        data = data[0]
+        all_data = {
+            "all": data,
+            "coordinates": data["geojson"],
+            "lat": float(data["lat"]),
+            "lon": float(data["lon"])}
+        return all_data
+
+    def get_info_from_title(self, title):
+        url = self.wiki_info_from_title + str(title)
+        all_data = rqsts.get(url)
+        all_data = all_data.json()
+        dict_data = {}
+        try:
+            all_data = all_data["query"]["search"]
+            list_data = all_data
+            for i, e in enumerate(list_data):
+                dict_data[i] = e
+            lg.debug("\n")
+            lg.debug("Voici le contenu du dictionnaire :")
+            lg.debug("\n")
+            for k, v in dict_data.items():
+                lg.debug("{} ----> {}".format(k, v))
+        except Exception as e:
+            lg.info("Erreur sur clé query : {}".format(e))
+        return dict_data
+
+    def get_article_wiki_by_pageid(self, page_id):
+        """ paris = pageids=681159"""
+        page_id = str(page_id)
+        url = self.wiki_art_by_pageid + page_id
+        data_raw = rqsts.get(url)
+        lg.debug(">> 1.1 - type: {}\n".format(type(data_raw)))
+        lg.debug(">> 1.1 - valeur: {}\n".format(data_raw))
+        dict_data = data_raw
+        lg.debug(">> 2.1 - type: {}\n".format(type(dict_data)))
+        lg.debug(">> 2.1 - valeur: {}\n".format(dict_data))
+        data = dict_data.json()
+        lg.debug(">> 3.1 - valeur: {}\n".format(data))
+        article = data["query"]["pages"][page_id]["extract"]
+        title = data["query"]["pages"][page_id]["title"]
+        article = self.gpb_messages(title, article)
+        # article = gpb_messages(title, article)
+        ##article = gpb_messages(title, article, ".\\static\\json\\gpb_messages.json")
+        return article
+
+    def stop_words_with_json(self):
+        stop_words = open_json_file(self.stop_words)
+        return stop_words
+
+
+#def stop_words_with_json(file=".\\GrandPyBot\\static\\json\\bad_words.json"):
+#    stop_words = open_json_file(file)
+#    return stop_words
+
+#def get_article_wiki_by_pageid(page_id):
+#    """ paris = pageids=681159"""
+#    load = Loading()
+#    wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exsentences=2&explaintext=true&pageids='
+#    page_id = str(page_id)
+#    url = wikiUrl+page_id
+#    data_raw = rqsts.get(url)
+#    lg.debug(">> 1.1 - type: {}\n".format(type(data_raw)))
+#    lg.debug(">> 1.1 - valeur: {}\n".format(data_raw))
+#    dict_data = data_raw
+#    lg.debug(">> 2.1 - type: {}\n".format(type(dict_data)))
+#    lg.debug(">> 2.1 - valeur: {}\n".format(dict_data))
+#    data = dict_data.json()
+#    lg.debug(">> 3.1 - valeur: {}\n".format(data))
+#    article = data["query"]["pages"][page_id]["extract"]
+#    title = data["query"]["pages"][page_id]["title"]
+#    load = Loading()
+#    article = load.gpb_messages(title, article)
+#    #article = gpb_messages(title, article)
+#    ##article = gpb_messages(title, article, ".\\static\\json\\gpb_messages.json")
+#    return article
+
+
+#def get_info_from_title(title):
+#    wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch='
+#    url = wikiUrl + str(title)
+#    all_data = rqsts.get(url)
+#    all_data = all_data.json()
+#    dict_data = {}
+#    try:
+#        all_data = all_data["query"]["search"]
+#        list_data = all_data
+#        for i, e in enumerate(list_data):
+#            dict_data[i] = e
+#        lg.debug("\n")
+#        lg.debug("Voici le contenu du dictionnaire :")
+#        lg.debug("\n")
+#        for k, v in dict_data.items():
+#            lg.debug("{} ----> {}".format(k, v))
+#    except Exception as e:
+#        lg.info("Erreur sur clé query : {}".format(e))
+#    return dict_data
+
+#def get_coordinates_from_osm(title):
+#    osm_url = "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2&q="
+#    url = osm_url + title
+#    data = rqsts.get(url)
+#    data = data.json()
+#    data = data[0]
+#    all_data = {
+#        "all": data,
+#        "coordinates": data["geojson"],
+#        "lat": float(data["lat"]),
+#        "lon": float(data["lon"])}
+#    return all_data
+
+#def get_coordinates_from_wiki(title):
+#    wikiUrl = "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&&format=json&titles="
+#    url = wikiUrl+title
+#    data = rqsts.get(url)
+#    data = data.json()
+#    all_data = data["query"]["pages"]
+#    return all_data
+
+#def gpb_messages(title, raw_text, file=".\\GrandPyBot\\static\\json\\gpb_messages.json"):
+#    messages = open_json_file(file)
+#    chance_h = rd.randrange(0, 10)
+#    chance_f = rd.randrange(0, 10)
+#    chance_h1 = rd.randrange(0, 6)
+#    chance_h2 = rd.randrange(0, 6)
+#    chance_h3 = rd.randrange(0, 6)
+#    header = messages["header"]
+#    footer = messages["footer"]
+#    header = header[chance_h]
+#    footer = footer[chance_f]
+#    h = messages["gpb"]
+#    h1 = title+messages["gpb_1"][chance_h1]
+#    h2 = messages["gpb_2"][chance_h2]
+#    h3 = messages["gpb_3"][chance_h3]
+#    h4 = messages["gpb_4"]
+#    haiku = h+h1+h2+h3+h4
+#    text = header+raw_text+haiku+footer
+#    return text
 
 
 def get_coordinates(wiki_data, wiki_page_id, entry):
+    load = Loading()
     status = False
     api = ""
     api_data = ""
-    data_wiki = get_coordinates_from_wiki(wiki_data)
-    data_osm = get_coordinates_from_osm(entry)
+    data_wiki = load.get_coordinates_from_wiki(wiki_data)
+    #data_wiki = get_coordinates_from_wiki(wiki_data)
+    data_osm = load.get_coordinates_from_osm(entry)
     if check_coordinates(data_wiki[str(wiki_page_id)]):
         api = "wiki"
         status = True
@@ -59,75 +225,20 @@ def check_coordinates(data):
     return status
 
 
-def get_coordinates_from_wiki(title):
-    wikiUrl = "https://fr.wikipedia.org/w/api.php?action=query&prop=coordinates&&format=json&titles="
-    url = wikiUrl+title
-    data = rqsts.get(url)
-    data = data.json()
-    all_data = data["query"]["pages"]
-    return all_data
-
-
-def get_coordinates_from_osm(title):
-    osm_url = "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2&q="
-    url = osm_url + title
-    data = rqsts.get(url)
-    data = data.json()
-    data = data[0]
-    all_data = {
-        "all": data,
-        "coordinates": data["geojson"],
-        "lat": float(data["lat"]),
-        "lon": float(data["lon"])}
-    return all_data
 
 
 
 
 
-def get_info_from_title(title):
-    wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch='
-    url = wikiUrl + str(title)
-    all_data = rqsts.get(url)
-    all_data = all_data.json()
-    dict_data = {}
-    try:
-        all_data = all_data["query"]["search"]
-        list_data = all_data
-        for i, e in enumerate(list_data):
-            dict_data[i] = e
-        lg.debug("\n")
-        lg.debug("Voici le contenu du dictionnaire :")
-        lg.debug("\n")
-        for k, v in dict_data.items():
-            lg.debug("{} ----> {}".format(k, v))
-    except Exception as e:
-        lg.info("Erreur sur clé query : {}".format(e))
-    return dict_data
+
+
 
 
 def get_page_id_from_data(all_data):
     return all_data[0]["pageid"]
 
 
-def get_article_wiki_by_pageid(page_id):
-    """ paris = pageids=681159"""
-    wikiUrl = 'https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exsentences=2&explaintext=true&pageids='
-    page_id = str(page_id)
-    url = wikiUrl+page_id
-    data_raw = rqsts.get(url)
-    lg.debug(">> 1.1 - type: {}\n".format(type(data_raw)))
-    lg.debug(">> 1.1 - valeur: {}\n".format(data_raw))
-    dict_data = data_raw
-    lg.debug(">> 2.1 - type: {}\n".format(type(dict_data)))
-    lg.debug(">> 2.1 - valeur: {}\n".format(dict_data))
-    data = dict_data.json()
-    lg.debug(">> 3.1 - valeur: {}\n".format(data))
-    article = data["query"]["pages"][page_id]["extract"]
-    title = data["query"]["pages"][page_id]["title"]
-    article = gpb_messages(title, article)
-    #article = gpb_messages(title, article, ".\\static\\json\\gpb_messages.json")
-    return article
+
 
 
 def is_word_bad(first_list, second_list, delete=True):
@@ -205,7 +316,8 @@ def is_word_in(first_list, second_list, delete=True):
 
 def secure_text(text):
     #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
-    stop_words = stop_words_with_json()
+    load = Loading()
+    stop_words = load.stop_words_with_json()
     for c in stop_words["xss"]:
         if c in text:
             text = text.replace(c, "")
@@ -213,10 +325,11 @@ def secure_text(text):
     return text
 
 def cleanup_text(text):
+    load = Loading()
     text = secure_text(text)
     hashed_text = hash_text(text)
     #stop_words = stop_words_with_json(".\\static\\json\\bad_words.json")
-    stop_words = stop_words_with_json()
+    stop_words = load.stop_words_with_json()
     treatment_report = is_word_bad(hashed_text, stop_words)
     cleaned_word = treatment_report["text_after"]
     return cleaned_word
@@ -254,9 +367,7 @@ def open_file(path_fichier):
     return liste_fichier
 
 
-def stop_words_with_json(file=".\\GrandPyBot\\static\\json\\bad_words.json"):
-    stop_words = open_json_file(file)
-    return stop_words
+
 
 
 def is_entry_empty(text):
@@ -281,19 +392,20 @@ def is_wrong_entry(data):
 
 def entry_treatment(text):
     output = {}
+    load = Loading()
     lg.info("\nUser Entry >>>> : " + text)
     lg.info("\nMedia wiki API resqusting...\n")
     text = cleanup_text(text)
     if is_entry_empty(text)["status"]:
         output["article"] = is_entry_empty(text)["text"]
         return output
-    output["info"] = get_info_from_title(text)
+    output["info"] = load.get_info_from_title(text)
     report = is_wrong_entry(output["info"])
     if not report["status"]:
         output["article"] = report["text"]
         return output
     output["page_id"] = get_page_id_from_data(output["info"])
-    output["article"] = str(get_article_wiki_by_pageid(output["page_id"]))
+    output["article"] = str(load.get_article_wiki_by_pageid(output["page_id"]))
     lg.info("\nMedia wiki Response >>>> : " + output["article"]+"\n")
     lg.debug("type response: {}\n".format(type(output["article"])))
     info = output["info"]
