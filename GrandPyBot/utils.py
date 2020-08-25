@@ -1,3 +1,10 @@
+""" Preparing operational functions with the "utils.py" module.
+    - This module mainly works on text treatment.
+    - It erases XSS breaches for avoid cross-scripting attacks.
+    - It handles wrong user entries.
+    - It parses the text to request APIs with the best data.
+    - It formats the APIs response.
+    - It provides prepared APIs responses to the "views.py" module."""
 # -*- coding: utf-8 -*-
 import requests as rqsts
 import json
