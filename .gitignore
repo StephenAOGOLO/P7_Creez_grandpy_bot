@@ -4,6 +4,7 @@
 /00_auto_install
 /backup
 /cours
+/grandpybot1
 /Include
 /Lib
 /Scripts
@@ -15,7 +16,8 @@
 /start_server.bat
 /start_server_with_main.py.bat
 /start_tests.bat
-/grandpybot1
+
+
 
 
 
