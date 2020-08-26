@@ -28,7 +28,7 @@ class Loading:
         #self.api = the_options.get_data_file_ini("api")
         #self.parse = the_options.get_data_file_ini("parse")
         #self.stop_words = self.parse["stop_words"]
-        self.file = ".\\\GrandPyBot\\static\\json\\settings.json"
+        self.file = "/app/GrandPyBot/static/json/settings.json"
         #self.file = ".\\GrandPyBot\\static\\json\\settings.json"
         self.options = open_json_file(self.file)
 
