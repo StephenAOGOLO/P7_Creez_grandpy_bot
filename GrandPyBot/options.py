@@ -6,6 +6,7 @@ Two methods to retrieve and provide data from an external file.
 """
 # -*- coding: utf-8 -*-
 import configparser as cp
+import os
 
 
 class Settings:
@@ -17,7 +18,9 @@ class Settings:
         This constructor create a instance
         which contains all the data from a file ini.
         """
-        self.file_ini = ".\\GrandPyBot\\static\\ini\\settings.ini"
+        #self.file_ini = ".\\GrandPyBot\\static\\ini\\settings.ini"
+        self.basedir = os.path.dirname(os.path.abspath(__file__))
+        self.file_ini = self.basedir+"\\GrandPyBot\\static\\ini\\settings.ini"
         self.all_sections_file = self.get_all_sections_file_ini()
 
     def get_data_file_ini(self, section):
