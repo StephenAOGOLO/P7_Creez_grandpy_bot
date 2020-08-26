@@ -1,9 +1,17 @@
 # Created by .ignore support plugin (hsz.mobi)
+<<<<<<< HEAD
 /.idea
+=======
+*.idea
+>>>>>>> 1.4_dev
 /.pytest_cache
 /00_auto_install
 /backup
 /cours
+<<<<<<< HEAD
+=======
+/grandpybot1
+>>>>>>> 1.4_dev
 /Include
 /Lib
 /Scripts
@@ -30,3 +38,8 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1.4_dev
