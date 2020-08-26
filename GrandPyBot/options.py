@@ -18,7 +18,7 @@ class Settings:
         This constructor create a instance
         which contains all the data from a file ini.
         """
-        self.file_ini = ".\\static\\ini\\settings.ini"
+        self.file_ini = os.path.abspath(os.path.dirname(__file__))+"\\static\\ini\\settings.ini"
         #self.file_ini = ".\\GrandPyBot\\static\\ini\\settings.ini"
         self.all_sections_file = self.get_all_sections_file_ini()
 
