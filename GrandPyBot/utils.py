@@ -31,8 +31,6 @@ class Loading:
         self.parse = the_options.get_data_file_ini("parse")
         self.stop_words = self.parse["stop_words"]
 
-
-
     def gpb_messages(self, title, raw_text):
         """ This method provides personal messages into the GPB response """
         gpb_msg = self.msg["gpb_msg"]
@@ -293,8 +291,3 @@ def entry_treatment(text):
     output["place"] = location
     lg.info("\nOUTPUT:\n%s\n", output)
     return output
-
-if __name__=="__main__":
-    entry_treatment("paris")
-    print("fin")
-

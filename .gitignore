@@ -4,7 +4,6 @@
 /00_auto_install
 /backup
 /cours
-/grandpybot1
 /Include
 /Lib
 /Scripts
@@ -13,9 +12,19 @@
 /tests
 /00_auto_install.zip
 /auto_install.bat
+/start_GPB.bat
 /start_server.bat
 /start_server_with_main.py.bat
 /start_tests.bat
+/grandpybot1
+/GrandPyBot/static/js/endloading.js
+/GrandPyBot/static/js/gmap2.js
+/GrandPyBot/static/js/initmap.js
+/GrandPyBot/static/js/loader.js
+/GrandPyBot/static/json/fr.json
+/GrandPyBot/static/json/verbes_lowercase.json
+/GrandPyBot/__pycache__
+
 
 
 
