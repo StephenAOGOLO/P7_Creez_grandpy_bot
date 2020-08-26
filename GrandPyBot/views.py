@@ -32,7 +32,7 @@ def home():
                            gmap_url=gmap_url)
 
 
-@app.route('/catcher', methods=["POST"])
+@app.route('/catcher', methods=["GET"])
 def catcher():
     """
     This function is the route which is the core
