@@ -30,7 +30,7 @@ class Loading:
         #self.parse = the_options.get_data_file_ini("parse")
         #self.stop_words = self.parse["stop_words"]
         self.path = os.path.abspath(os.path.dirname(__file__))
-        self.file = os.path.join(self.path, "\\static\\json\\settings.json")
+        self.file = os.path.join(self.path, "static/json/settings.json")
         #self.file = ".\\GrandPyBot\\static\\json\\settings.json"
         self.options = open_json_file(self.file)
 
