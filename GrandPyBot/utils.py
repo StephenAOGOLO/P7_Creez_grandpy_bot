@@ -23,15 +23,20 @@ class Loading:
         This constructor create a instance
         which contains all the data from a file ini.
         """
-        the_options = opt.Settings()
-        self.msg = the_options.get_data_file_ini("msg")
-        self.api = the_options.get_data_file_ini("api")
-        self.parse = the_options.get_data_file_ini("parse")
-        self.stop_words = self.parse["stop_words"]
+        #the_options = opt.Settings()
+        #self.msg = the_options.get_data_file_ini("msg")
+        #self.api = the_options.get_data_file_ini("api")
+        #self.parse = the_options.get_data_file_ini("parse")
+        #self.stop_words = self.parse["stop_words"]
+        self.file = ".\\\GrandPyBot\\static\\json\\settings.json"
+        #self.file = ".\\GrandPyBot\\static\\json\\settings.json"
+        self.options = open_json_file(self.file)
+
 
     def gpb_messages(self, title, raw_text):
         """ This method provides personal messages into the GPB response """
-        gpb_msg = self.msg["gpb_msg"]
+        #gpb_msg = self.msg["gpb_msg"]
+        gpb_msg = self.options["gpb_msg"]
         messages = open_json_file(gpb_msg)
         h_1 = rd.randrange(0, 10)
         f_1 = rd.randrange(0, 10)
@@ -54,7 +59,8 @@ class Loading:
     def get_coordinates_from_wiki(self, title):
         """ This method obtain longitude and latitude
         from a WikiPedia title """
-        wiki_coordinates = self.api["wiki_coordinates"]
+        #wiki_coordinates = self.api["wiki_coordinates"]
+        wiki_coordinates = self.options["wiki_coordinates"]
         url = wiki_coordinates+title
         data = rqsts.get(url)
         data = data.json()
@@ -64,7 +70,8 @@ class Loading:
     def get_coordinates_from_osm(self, title):
         """ This method obtain longitude and latitude
         from OpenStreetMap Api """
-        osm_coordinates = self.api["osm_coordinates"]
+        #osm_coordinates = self.api["osm_coordinates"]
+        osm_coordinates = self.options["osm_coordinates"]
         url = osm_coordinates + title
         data = rqsts.get(url)
         data = data.json()
@@ -78,7 +85,8 @@ class Loading:
 
     def get_info_from_title(self, title):
         """ This method obtain all raw informations from WikiPedia title """
-        wiki_info_from_title = self.api["wiki_info_from_title"]
+        #wiki_info_from_title = self.api["wiki_info_from_title"]
+        wiki_info_from_title = self.options["wiki_info_from_title"]
         url = wiki_info_from_title + str(title)
         all_data = rqsts.get(url)
         all_data = all_data.json()
@@ -95,7 +103,8 @@ class Loading:
     def get_article_wiki_by_pageid(self, page_id):
         """ This method obtain the relative article
         with a WikiPedia page id """
-        wiki_art_by_pageid = self.api["wiki_art_by_pageid"]
+        #wiki_art_by_pageid = self.api["wiki_art_by_pageid"]
+        wiki_art_by_pageid = self.options["wiki_art_by_pageid"]
         page_id = str(page_id)
         url = wiki_art_by_pageid + page_id
         data_raw = rqsts.get(url)
@@ -108,7 +117,9 @@ class Loading:
 
     def stop_words_with_json(self):
         """ This method provides all the forbidden characters """
-        stop_words = open_json_file(self.stop_words)
+        #stop_words = open_json_file(self.stop_words)
+        stop_words = self.options["stop_words"]
+        stop_words = open_json_file(stop_words)
         return stop_words
 
 
@@ -287,3 +298,8 @@ def entry_treatment(text):
     output["place"] = location
     lg.info("\nOUTPUT:\n%s\n", output)
     return output
+
+if __name__=="__main__":
+    entry_treatment("paris")
+    print("fin")
+
