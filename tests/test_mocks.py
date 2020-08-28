@@ -1,4 +1,5 @@
 from GrandPyBot import views, utils
+from GrandPyBot.utils import Loading
 import requests
 import json
 
@@ -127,8 +128,8 @@ def test_get_info_from_title(monkeypatch):
                  'snippet': snippet,
                  'timestamp': '2020-07-26T22:40:32Z'}
                 }
-    monkeypatch.setattr('GrandPyBot.utils.get_info_from_title', mock_get_info_from_title)
-    result = utils.get_info_from_title("brésil")
+    monkeypatch.setattr('GrandPyBot.utils.Loading.get_info_from_title', mock_get_info_from_title)
+    result = Loading.get_info_from_title("brésil")
     assert result[0]["title"] == "Brésil"
 
 
@@ -177,8 +178,8 @@ def test_get_page_id_from_data(monkeypatch):
 def test_get_article_wiki_by_pageid(monkeypatch):
     def mock_get_article_wiki_by_pageid():
         return 1
-    monkeypatch.setattr('GrandPyBot.utils.get_article_wiki_by_pageid', mock_get_article_wiki_by_pageid)
-    result = utils.get_article_wiki_by_pageid()
+    monkeypatch.setattr('GrandPyBot.utils.Loading.get_article_wiki_by_pageid', mock_get_article_wiki_by_pageid)
+    result = utils.Loading.get_article_wiki_by_pageid()
     assert result == 1
 
 
@@ -235,13 +236,80 @@ def test_is_word_bad(monkeypatch):
 
 def test_stop_words_with_json(monkeypatch):
     def mock_stop_words_with_json():
-        return 1
-    monkeypatch.setattr('GrandPyBot.utils.stop_words_with_json', mock_stop_words_with_json)
-    result = utils.stop_words_with_json()
-    assert result == 1
+        return True
+    monkeypatch.setattr('GrandPyBot.utils.Loading.stop_words_with_json', mock_stop_words_with_json)
+    result = utils.Loading.stop_words_with_json()
+    result = result["6"]
+    test_word = "hasard"
+    assert test_word == result
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 """     End of test for stop_words_with_json() """
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
+"Start of test for get_coordinates_from_osm() "
+""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
+
+
+def test_get_coordinates_from_osm(monkeypatch):
+    def mock_get_coordinates_from_osm():
+        return 1
+    monkeypatch.setattr('GrandPyBot.utils.Loading.stop_words_with_json', mock_get_coordinates_from_osm)
+    test_load = Loading()
+    result = utils.Loading.get_coordinates_from_osm(test_load, "openclassrooms")
+    assert result["all"]["geojson"]["coordinates"] == [2.3504885, 48.8747786]
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""     End of test for get_coordinates_from_osm() """
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
+"Start of test for get_coordinates_from_wiki() "
+""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
+
+
+def test_get_coordinates_from_wiki(monkeypatch):
+    def mock_get_coordinates_from_wiki():
+        return 1
+    monkeypatch.setattr('GrandPyBot.utils.Loading.stop_words_with_json', mock_get_coordinates_from_wiki)
+    test_load = Loading()
+    result = utils.Loading.get_coordinates_from_wiki(test_load, "carnon")
+    assert result["30323"]["coordinates"] == [{'globe': 'earth', 'lat': 43.546857, 'lon': 3.979254, 'primary': ''}]
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""     End of test for get_coordinates_from_wiki() """
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
+"Start of test for gpb_messages() "
+""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
+
+
+def test_gpb_messages(monkeypatch):
+    def mock_gpb_messages():
+        return 1
+    monkeypatch.setattr('GrandPyBot.utils.Loading.stop_words_with_json', mock_gpb_messages)
+    test_load = Loading()
+    test_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." \
+                " Sed non risus. Suspendisse lectus tortor, dignissim sit amet," \
+                " adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+    result = utils.Loading.gpb_messages(test_load, "carnon", test_text)
+    assert "carnon" in result.lower()
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""     End of test for gpb_messages() """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -37,5 +37,8 @@
   "test_mocks.py::test_is_word_bad",
   "test_mocks.py::test_is_entry_empty_01",
   "test_mocks.py::test_is_entry_empty_02",
-  "test_mocks.py::test_is_entry_empty_03"
+  "test_mocks.py::test_is_entry_empty_03",
+  "test_mocks.py::test_get_coordinates_from_osm",
+  "test_mocks.py::test_get_coordinates_from_wiki",
+  "test_mocks.py::test_gpb_messages"
 ]
