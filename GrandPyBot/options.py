@@ -19,7 +19,7 @@ class Settings:
         which contains all the data from a file ini.
         """
         self.basedir = os.path.abspath(os.path.dirname(__file__))
-        self.path = "\\static\\ini\\settings.ini"
+        self.path = "/static/ini/settings.ini"
         self.file_ini = self.basedir + self.path
         self.all_sections_file = self.get_all_sections_file_ini()
 

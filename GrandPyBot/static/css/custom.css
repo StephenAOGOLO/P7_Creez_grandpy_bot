@@ -54,7 +54,7 @@
 #button
 {
     position: absolute;
-    top: 5%;
+    top: 10%;
 
 }
 body
@@ -66,7 +66,7 @@ footer
 {
     position: absolute;
     top: 90%;
-    left: 20%;
+    left: 35%;
     font-style: italic;
 	font-family: "Times New Roman", Times,"Agency FB", serif;
 	font-size: 10px;
@@ -85,7 +85,7 @@ header
 }
 #form-area
 {
-        position: absolute;
+        position: relative;
         height: 50%;
         width: 100%;
         top: 20%;
@@ -108,11 +108,12 @@ header
     font-size: 30px;
 	position: absolute;
     left: 5%;
-    top: 30%;
+    top: 40%;
     height:80%;
     width: 45%;
     border: white;
     resize: none;
+    color: rgb(100,100,300);
 }
 html
 {
@@ -123,8 +124,8 @@ html
 #place-container
 {
 	position: absolute;
-    top: 30%;
-    left: 60%;
+    top: 40%;
+    left: 55%;
     height:80%;
     width: 45%;
 }
@@ -193,12 +194,9 @@ html
     }
     #gpb-hello
     {
-        height: 10%;
         font-family: "Times New Roman", Times,"Agency FB", serif;
-        font-size: 20px;
+        font-size: 16px;
         text-align: center;
-        position: absolute;
-        left: 1%;
     }
     body
     {
@@ -207,24 +205,21 @@ html
     #form-area
     {
         position: absolute;
-        top: 20%;
+        top: 8%;
         width: 100%;
-        height: 50%;
+        height: 55%;
     }
     #search-box
     {
-
-        position: absolute;
+        position: relative;
+        top: 90%;
         width: 100%;
         height: 10%;
     }
-    #button
-    {
-        position: absolute;
-        top: 120%;
-    }
     #research
     {
+        position: relative;
+        top: -100%;
         font-size: 40px;
         height: 100%;
         width: 75%;
@@ -233,7 +228,8 @@ html
     {
         text-align: center;
         font-size: 40px;
-        position: absolute;
+        position: relative;
+        top: 30%;
         width: 80%;
         height: 50%;
         left: 10%;
@@ -272,7 +268,7 @@ html
     }
 }
 /*For every horizontal mobile screens*/
-@media screen and (max-height: 800px)
+@media screen and (max-height: 1000px)
 {
 
     body
@@ -291,21 +287,19 @@ html
     }
     #search-box
     {
-        position: absolute;
-        top: 8%;
+        position: relative;
+        top: 10%;
         left: 25%;
         width: 50%;
     }
     #button
     {
-        position: absolute;
-        top: 120%;
+       top: 150%;
     }
     #research
     {
         height: 60%;
         width: 80%;
-
     }
     #form-area
     {
@@ -355,15 +349,47 @@ html
         left: 20%;
     }
 }
-/* long vertical mobile screens */
-@media screen and (max-width: 1300px)
+/* long vertical mobiles screens */
+@media screen and (max-width: 1000px)
 {
     body
     {
         height: 100%;
+    }
+    #gpb-hello
+    {
+        text-align: center;
+        width: 50%;
+        margin: auto;
+    }
+    #search-box
+    {
+        display: flex;
+	    flex-direction: row;
+	    flex-wrap: wrap;
+	    justify-content : space-around;
+	    align-items: center;
+	    position: absolute;
+	    top: 20%;
     }
     #response
     {
         font-size: 20px;
     }
 }
+@media screen and (min-width: 1500px)
+{
+    #gpb-hello
+    {
+        text-align: center;
+        width: 70%;
+        margin: auto;
+        font-size: 15px;
+    }
+    #place
+    {
+        width: 800px;
+        height: 200px;
+    }
+}
+

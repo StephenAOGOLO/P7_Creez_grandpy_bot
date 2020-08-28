@@ -1,28 +1,30 @@
 # Created by .ignore support plugin (hsz.mobi)
-<<<<<<< HEAD
-/.idea
-=======
 *.idea
->>>>>>> 1.4_dev
 /.pytest_cache
 /00_auto_install
 /backup
 /cours
-<<<<<<< HEAD
-=======
-/grandpybot1
->>>>>>> 1.4_dev
 /Include
 /Lib
+/Livrables
 /Scripts
 /SQLITE
 /tcl
 /tests
 /00_auto_install.zip
 /auto_install.bat
+/start_GPB.bat
 /start_server.bat
 /start_server_with_main.py.bat
 /start_tests.bat
+/grandpybot1
+/GrandPyBot/static/js/endloading.js
+/GrandPyBot/static/js/gmap2.js
+/GrandPyBot/static/js/initmap.js
+/GrandPyBot/static/js/loader.js
+/GrandPyBot/static/json/fr.json
+/GrandPyBot/static/json/verbes_lowercase.json
+/GrandPyBot/__pycache__
 
 
 
@@ -38,8 +40,6 @@
 
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 1.4_dev
+

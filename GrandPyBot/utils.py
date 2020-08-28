@@ -284,6 +284,7 @@ def entry_treatment(text):
     page_id = output["page_id"]
     wiki_data = info[0]["title"]
     result = get_coordinates(wiki_data, page_id, text)
+    output["report"] = result
     data = result["data"]
     location = choose_geocoding(data, result, page_id)
     location["zoom"] = 10
