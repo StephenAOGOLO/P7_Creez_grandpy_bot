@@ -1,4 +1,6 @@
 # P7_Creez_grandpy_bot  
+[![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s)](https://openclassrooms.com/fr)
+[![](https://grandpybotone.herokuapp.com/static/png/gpb.png)](https://grandpybotone.herokuapp.com/static/png/gpb.png) 
 ## Introduction  
     
     Ah, les grands-pères... Je ne sais pas vous, mais le mien connaissait quantité d'histoires.  
@@ -26,7 +28,7 @@
     - Vous pouvez vous amuser à inventer plusieurs réponses différentes de la part de GrandPy  
     mais ce n'est pas une obligation. Amusez-vous !  
 
-### Parcours utilisateur
+### Parcours utilisateur  
 
     L'utilisateur ouvre son navigateur et entre l'URL que vous lui avez fournie.  
     Il arrive devant une page contenant les éléments suivants :  
@@ -48,17 +50,95 @@
     Elle est en forme de té, une branche débouche au 43 rue de Paradis,  
     la deuxième au 57 rue d'Hauteville et la troisième en impasse.  
     
-### Conception & Réalisation
+### Conception & Réalisation  
 
 La réalisation du projet s'appuie sur une méthodologie agile.  
 Ses étapes sont disponibles sur : [Trello](https://trello.com/invite/b/rpLoSERM/1b9969b583e9da8879e4e900f5909e7d/p7creezgrandpybot)  
 
-Les informations principales du projet ainsi que  
-les composants de la solution sont disponibles sur : [GitHub](https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot)  
+## Conception  
+Le Front-End.   
+Le site web est responsive. Il s'adapte à quatre types d'écran:  
 
-### Installation et Hébergement
-#### Installation manuelle  
-#### Installation automatique  
-#### Hébergement  
+    - L’ordinateur portable.
+    - Le grand écran.
+    - Le mobile tenu à la verticale.
+    - Le mobile tenu à l’horizontale.
 
+Le Back-End.  
+Les user-story peuvent être regroupées en plusieurs étapes fonctionnelles,
+faisant parti du processus algorithmique de l'application.  
+Ci-dessous, le processus algorithmique du fonctionnement nominal, gestion d'erreur exclue:  
+    
+    - Capture du texte saisi par l'utilisateur.  
+    - Sécurisation XSS: Hachage et épuration du texte.  
+    - Parsing: Hachage et épuration du texte.  
+    - API Wikipedia: Envoi du texte formaté vers le serveur MediaWiki.  
+    - API GoogleMaps: Envoi du texte formaté vers le serveur GoogleMaps.  
+    - API OpenStreetMap: Envoi du texte formaté vers le serveur OpenStreetMap.  
+    - Réponse API : Analyse et mise en forme des réponses API.  
+    - Centralisation des réponses API.  
+    - Génération des messages personnalisées.  
+    - Centralisation du texte à afficher.  
+    - Affichage de la résponse.  
+
+
+## Réalisation  
+La réalisation du projet s'est appuyé sur le plan d'action suivant:  
  
+    - Initialisation de Flask.
+    - Création de l’Interface Utilisateur.
+    - Création d’une fonction de « Parsing ».
+    - Création des gestionnaires APIs (MediaWiki, Google Maps et OpenStreetMap).   
+    - Création des messages personnalisés (voir ci dessous)
+
+## Messages personnalisés  
+Les messges personnalisés représentent ce dit GrandPyBot à l'affichage de la réponse.  
+Il s'exclame au début de la description du lieu demandé puis récite un HAIKU,  
+avant d'inviter l'utilisateur à regarder la carte où se trouve la géolocalisation du lieu.  
+
+Un HAIKU est un petit poème japonais de trois vers qui permet de méditer...[Description](https://fr.wikipedia.org/wiki/Haïku)  
+
+Le HAIKU est généré de manière aléatoire à chaque recherche et s'éfforce de correspondre au lieu demandé.   
+
+## API OpenStreetMap  
+Cet Api est utilisé en complément de l'API MediaWiki afin de retrouver les coordonnées géogrphiques,  
+latitudes et longitudes, du lieu demandé.  
+
+Dans le cas où MediaWiki ne retrouve pas un lieu demandé, OpenStreetMap prend le relais pour effectuer la recherche.  
+Cela a pour but d'améliorer l'efficacité de GrandPyBot, en augmentant le succès des recherches.  
+
+Voici à quoi resemble [OpenStreetMap](http://www.openstreetmap.fr)  
+### Installation  
+## Hébergement  
+
+Le site web a été mis en ligne sur la plateforme [HEROKU](https://www.heroku.com/what).  
+
+## Adresse du site  
+
+Le site web est disponible via [cette adresse](https://grandpybotone.herokuapp.com/).  
+
+## GitHub  
+Les informations principales du projet ainsi que  
+ses composants de la solution sont disponibles sur : [GitHub](https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot)  
+
+## Versions  
+GrandPyBot : 1.4  
+Python : 3.6  
+Flask : 1.1.2  
+
+
+## Rappel des liens  
+[GrandPyBot](https://grandpybotone.herokuapp.com/)  
+[Trello](https://trello.com/invite/b/rpLoSERM/1b9969b583e9da8879e4e900f5909e7d/p7creezgrandpybot)  
+[Haiku](https://fr.wikipedia.org/wiki/Haïku)  
+[OpenStreetMap](http://www.openstreetmap.fr)  
+[Heroku](https://www.heroku.com/what)  
+[GitHub](https://github.com/StephenAOGOLO/P7_Creez_grandpy_bot)  
+
+## Auteur
+Stephen A.OGOLO
+
+## Remerciements  
+Merci pour cette lecture et pour l'attention portée à ces informations.  
+Bonne utilisation ;)
+  
