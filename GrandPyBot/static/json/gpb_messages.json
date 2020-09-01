@@ -26,7 +26,7 @@
           "\n\n;-) , La réponse de GrandPyBot en image, ;-)  "
 
         ],
-  "gpb": "\n\nTu sais, j'adore composer des haikus avec les questions que l'ont me pose.\nVoici celui que j'ai composé à l'instant:\n\n",
+  "gpb": "\n\n********************\nTu sais, j'adore composer des haikus avec les questions que l'ont me pose.\nVoici celui que j'ai composé à l'instant:\n\n",
   "gpb_1":
           [
             "... tel que je te connais,",
@@ -54,6 +54,6 @@
             "\nOn devrait parler de toi plus souvent.",
             "\nJe dédie mon existence à ta recherche."
           ],
-  "gpb_4": "\n\nTu as aimer cet haiku ? je peux en composer d'autres si tu appuies encore sur le boutton."
+  "gpb_4": "\n\nTu as aimer cet haiku ? je peux en composer d'autres si tu appuies encore sur le boutton.\n********************\n"
 
 }

@@ -52,7 +52,8 @@ class Loading:
         h40 = messages["gpb_4"]
         haiku = h_1+h10+h20+h30+h40
         text = header+raw_text+haiku+footer
-        return text
+        msg = {"text": text, "haiku": haiku}
+        return msg
 
     def get_coordinates_from_wiki(self, title):
         """ This method obtain longitude and latitude
@@ -106,7 +107,9 @@ class Loading:
         data = dict_data.json()
         article = data["query"]["pages"][page_id]["extract"]
         title = data["query"]["pages"][page_id]["title"]
-        article = self.gpb_messages(title, article)
+        article = self.gpb_messages(title, article)["text"]
+        haiku = self.gpb_messages(title, article)["haiku"]
+        article = {"article": article, "haiku": haiku}
         return article
 
     def stop_words_with_json(self):
@@ -158,7 +161,7 @@ def is_word_bad(first_list, second_list, delete=True):
     raw_text = " ".join(first_list)
     for e_1 in first_list:
         length_to_check = len(e_1)
-        if length_to_check < 10:
+        if length_to_check < 11:
             for e_2 in second_list[str(length_to_check)]:
                 e_2 = e_2.replace("\n", "")
                 if e_1.lower() == e_2.lower():
@@ -189,11 +192,11 @@ def is_word_bad(first_list, second_list, delete=True):
     if presence > 0:
         status_presence = True
     treated_text = " ".join(first_list)
-    dic_result = {"text_before": raw_text,
+    dict_result = {"text_before": raw_text,
                   "text_after": treated_text,
                   "bad_words_presence": status_presence,
                   "bad_words": bad_words}
-    return dic_result
+    return dict_result
 
 
 def secure_text(text):
@@ -279,7 +282,8 @@ def entry_treatment(text):
         output["article"] = report["text"]
         return output
     output["page_id"] = get_page_id_from_data(output["info"])
-    output["article"] = str(load.get_article_wiki_by_pageid(output["page_id"]))
+    output["article"] = str(load.get_article_wiki_by_pageid(output["page_id"])["article"])
+    output["haiku"] = str(load.get_article_wiki_by_pageid(output["page_id"])["haiku"])
     info = output["info"]
     page_id = output["page_id"]
     wiki_data = info[0]["title"]

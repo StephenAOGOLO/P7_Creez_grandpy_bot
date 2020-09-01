@@ -1,25 +1,40 @@
-#return-gpb
-{
-    background-color: rgb(120,130,240);
-    color: white;
-    font-size: 30px;
-}
-#error
-{
-    background-color: rgb(120,130,240);
-}
-#error-page
+/*Native DOM components*/
+html
 {
     height: 100%;
-    background-color: rgb(120,100,240);
-    display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content : space-around;
-	align-items: center;
-	font-size: 30px;
-	color: white;
+    margin: 0;
+    padding: 0;
 }
+header
+{
+    height: 50px;
+    font-family: "Times New Roman", Times,"Agency FB", serif;
+    font-size: 11px;
+}
+body
+{
+    height: 500px;
+    background-color: white;
+}
+footer
+{
+    position: absolute;
+    top: 90%;
+    left: 35%;
+    font-style: italic;
+	font-family: "Times New Roman", Times,"Agency FB", serif;
+	font-size: 10px;
+	text-align: center;
+}
+/*Form configuration*/
+#form-area
+{
+        position: relative;
+        height: 50%;
+        width: 100%;
+        top: 20%;
+}
+/*Header components configuration*/
 #oc-logo-right
 {
     position: absolute;
@@ -43,6 +58,7 @@
 {
     text-align: center;
 }
+/*Search bar configuration*/
 #search-box
 {
     display: flex;
@@ -51,61 +67,24 @@
 	justify-content : space-around;
 	align-items: center;
 }
+#research
+{
+    width: 45%;
+    border: 1px solid purple;
+}
 #button
 {
     position: absolute;
     top: 10%;
 
 }
-body
-{
-    height: 500px;
-    background-color: white;
-}
-footer
-{
-    position: absolute;
-    top: 90%;
-    left: 35%;
-    font-style: italic;
-	font-family: "Times New Roman", Times,"Agency FB", serif;
-	font-size: 10px;
-	text-align: center;
-}
-header
-{
-    height: 50px;
-    font-family: "Times New Roman", Times,"Agency FB", serif;
-    font-size: 11px;
-}
-#topper h2
-{
-    text-align: center;
-    margin: auto;
-}
-#form-area
-{
-        position: relative;
-        height: 50%;
-        width: 100%;
-        top: 20%;
-}
-.GPB
-{
-    color: white;
-}
-
-
-#research
-{
-    width: 45%;
-    border: 1px solid purple;
-}
+/*Grandpybot response configuration*/
 #response
 {
     text-align: left;
     font-family: Arial, "Agency FB", sans-serif;
     font-size: 30px;
+    font-style: oblique;
 	position: absolute;
     left: 5%;
     top: 40%;
@@ -114,13 +93,17 @@ header
     border: white;
     resize: none;
     color: rgb(100,100,300);
+    opacity: 0;
 }
-html
+/*Grandpybot haiku configuration*/
+#haiku
 {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    opacity: 0;
+    border: white;
+    font-style: italic;
+    color: rgb(200,0,255);
 }
+/*Google Map configuration*/
 #place-container
 {
 	position: absolute;
@@ -139,11 +122,13 @@ html
 	align-items: center;
 	height: 400px;
 	width: 500px;
+	opacity: 0;
 }
 #place:nth-child(1)
 {
     order: 2
 }
+/*Loading icon configuration*/
 .loader-container
 {
 	opacity: 0;
@@ -151,10 +136,9 @@ html
     top: 30%;
     height: 120%;
     width: 100%;
-    background-color: white;
+    background-color: rgba(0,0,0,0);
     transition: opacity 1s ease-in-out, visibility 2s ease-in-out;
 }
-
 #loader
 {
     height: 100px;
@@ -168,6 +152,7 @@ html
     box-shadow: 1 0 6px 2px rgba(0,0,0,1);
     background-color: white;
     animation: loader 1s linear infinite;
+    transition: opacity 1s ease-in-out, visibility 2s ease-in-out;
 }
 #loader:nth-child(1)
 {
@@ -183,6 +168,29 @@ html
     {
         transform: translate(-50%, -50%) rotate(630deg);
     }
+}
+/*Error page configuration*/
+#error
+{
+    background-color: rgb(120,130,240);
+}
+#error-page
+{
+    height: 100%;
+    background-color: rgb(120,100,240);
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content : space-around;
+	align-items: center;
+	font-size: 30px;
+	color: white;
+}
+#error-return-gpb
+{
+    background-color: rgb(120,130,240);
+    color: white;
+    font-size: 30px;
 }
 /* For vertical mobile screens */
 @media screen and (min-height: 1742px)
@@ -234,10 +242,20 @@ html
         height: 50%;
         left: 10%;
     }
+    #haiku
+    {
+        text-align: center;
+        font-size: 40px;
+        position: relative;
+        top: 30%;
+        width: 80%;
+        height: 20%;
+        left: 10%;
+    }
     #place-container
     {
 	    position: absolute;
-	    top: 80%;
+	    top: 100%;
 	    left: 30%;
 	    height: 50%;
 	    text-align: center;
@@ -312,6 +330,7 @@ html
 	    position: absolute;
 	    top: 30%;
 	    left: 55%;
+	    height: 100%;
 
     }
     #place
@@ -330,10 +349,22 @@ html
         text-align: left;
         font-size: 20px;
       	position: absolute;
-      	top: 50%;
+      	top: 30%;
         left: 0%;
         width: 45%;
         height: 50%;
+    }
+    #haiku
+    {
+        text-align: left;
+        font-size: 20px;
+      	position: absolute;
+      	top: 90%;
+        left: 0%;
+        width: 45%;
+        height: 40%;
+        opacity: 0;
+
     }
     .loader-container
     {
@@ -345,7 +376,7 @@ html
     footer
     {
         position: absolute;
-        top: 90%;
+        top: 95%;
         left: 20%;
     }
 }
@@ -376,7 +407,12 @@ html
     {
         font-size: 20px;
     }
+    #haiku
+    {
+        font-size: 20px;
+    }
 }
+/*medium screen configuration*/
 @media screen and (min-width: 1500px)
 {
     #gpb-hello
@@ -389,7 +425,41 @@ html
     #place
     {
         width: 800px;
-        height: 200px;
+        height: 100%;
+    }
+}
+/*small screen configuration*/
+@media screen and (max-height: 400px)
+{
+    #form-area
+    {
+        height: 10%;
+    }
+    #search-box
+    {
+        top: 250%;
+    }
+    #response
+    {
+        height: 100%;
+        top: 500%;
+    }
+    #haiku
+    {
+        height: 100%;
+        top: 700%;
+    }
+    #place-container
+    {
+	    position: absolute;
+	    top: 500%;
+	    left: 55%;
+	    height: 200%;
+    }
+    footer
+    {
+        position: relative;
+        width:50%;
     }
 }
 

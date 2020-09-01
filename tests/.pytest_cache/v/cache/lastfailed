@@ -3,5 +3,6 @@
   "test_mocks.py::test_is_entry_empty": true,
   "test_mocks.py::test_sender": true,
   "test_mocks.py::test_sender_01": true,
+  "test_mocks.py::test_stop_words_with_json": true,
   "test_probe.py::test_my_func_importable": true
 }
